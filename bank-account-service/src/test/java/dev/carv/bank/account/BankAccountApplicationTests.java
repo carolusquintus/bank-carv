@@ -1,10 +1,10 @@
-package dev.carv.bank.accounts;
+package dev.carv.bank.account;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-class BankAccountsApplicationTests {
+class BankAccountApplicationTests {
 
     @Test
     void contextLoads() {

@@ -4,14 +4,14 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>dev.carv.bank</groupId>
-    <artifactId>parent</artifactId>
+    <artifactId>bank-parent</artifactId>
     <name>Bank System Parent</name>
     <description>Parent POM for Banking CARV System - manages dependencies and modules for the banking application</description>
     <version>0.0.1-SNAPSHOT</version>
     <packaging>pom</packaging>
 
     <modules>
-        <module>accounts</module>
+        <module>bank-account-service</module>
     </modules>
 
     <dependencyManagement>

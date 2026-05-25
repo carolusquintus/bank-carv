@@ -1,4 +1,4 @@
-package dev.carv.bank.accounts.entity;
+package dev.carv.bank.account.entity;
 
 
 import jakarta.persistence.Column;

@@ -1,6 +1,6 @@
-package dev.carv.bank.accounts.repository;
+package dev.carv.bank.account.repository;
 
-import dev.carv.bank.accounts.entity.CustomerEntity;
+import dev.carv.bank.account.entity.CustomerEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

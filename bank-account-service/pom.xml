@@ -5,13 +5,13 @@
 
     <parent>
         <groupId>dev.carv.bank</groupId>
-        <artifactId>parent</artifactId>
+        <artifactId>bank-parent</artifactId>
         <version>0.0.1-SNAPSHOT</version>
     </parent>
 
-    <artifactId>accounts</artifactId>
-    <name>Bank Accounts Service</name>
-    <description>Accounts microservice for managing customer bank accounts</description>
+    <artifactId>bank-account-service</artifactId>
+    <name>Bank Account Service</name>
+    <description>Account microservice for managing customer bank accounts</description>
 
     <properties>
         <java.version>21</java.version>

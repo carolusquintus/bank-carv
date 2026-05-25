@@ -1,4 +1,4 @@
-package dev.carv.bank.accounts.util;
+package dev.carv.bank.account.util;
 
 import java.nio.ByteBuffer;
 import java.security.SecureRandom;

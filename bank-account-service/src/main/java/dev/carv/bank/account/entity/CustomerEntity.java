@@ -1,6 +1,6 @@
-package dev.carv.bank.accounts.entity;
+package dev.carv.bank.account.entity;
 
-import dev.carv.bank.accounts.annotation.GeneratedUUIDv7;
+import dev.carv.bank.account.annotation.GeneratedUUIDv7;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
@@ -14,22 +14,19 @@ import java.util.UUID;
 @Entity
 @Table(name = "CUSTOMER")
 @EqualsAndHashCode(callSuper = true)
-public class AccountEntity extends AuditEntity {
+public class CustomerEntity extends AuditEntity {
 
     @Id
     @GeneratedUUIDv7
     private UUID id;
 
     @Column
-    private UUID customerId;
+    private String name;
 
     @Column
-    private Integer number;
+    private String email;
 
     @Column
-    private String type;
-
-    @Column
-    private String branchAddress;
+    private String mobileNumber;
 
 }

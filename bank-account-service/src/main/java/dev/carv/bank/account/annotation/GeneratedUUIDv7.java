@@ -1,4 +1,4 @@
-package dev.carv.bank.accounts.annotation;
+package dev.carv.bank.account.annotation;
 
 import org.hibernate.annotations.IdGeneratorType;
 
