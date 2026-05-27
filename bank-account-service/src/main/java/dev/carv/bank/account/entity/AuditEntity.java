@@ -11,16 +11,16 @@ import java.time.LocalDateTime;
 @MappedSuperclass
 public class AuditEntity {
 
-    @Column(updatable = false)
+    @Column(name = "CREATED_AT", updatable = false)
     private LocalDateTime createdAt;
 
-    @Column(updatable = false)
+    @Column(name = "UPDATED_AT", updatable = false)
     private LocalDateTime updatedAt;
 
-    @Column(insertable = false)
+    @Column(name = "CREATED_BY", insertable = false)
     private String createdBy;
 
-    @Column(insertable = false)
+    @Column(name = "UPDATED_BY", insertable = false)
     private String updatedBy;
 
 }

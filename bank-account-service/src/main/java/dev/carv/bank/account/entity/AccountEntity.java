@@ -1,35 +1,37 @@
 package dev.carv.bank.account.entity;
 
-import dev.carv.bank.account.annotation.GeneratedUUIDv7;
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import dev.carv.bank.account.constant.AccountType;
+import jakarta.persistence.*;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
 import java.util.UUID;
 
+import static jakarta.persistence.EnumType.STRING;
+
 @Data
 @Entity
-@Table(name = "CUSTOMER")
+@Table(name = "ACCOUNT")
 @EqualsAndHashCode(callSuper = true)
 public class AccountEntity extends AuditEntity {
 
     @Id
-    @GeneratedUUIDv7
-    private UUID id;
-
-    @Column
+    @Column(name = "CUSTOMER_ID")
     private UUID customerId;
 
-    @Column
-    private Integer number;
+    @Column(name = "NUMBER")
+    private Long number;
 
-    @Column
-    private String type;
+    @Column(name = "TYPE")
+    @Enumerated(STRING)
+    private AccountType type;
 
-    @Column
+    @Column(name = "BRANCH_ADDRESS")
     private String branchAddress;
+
+    @OneToOne
+    @MapsId
+    @JoinColumn(name = "CUSTOMER_ID")
+    private CustomerEntity customer;
 
 }
