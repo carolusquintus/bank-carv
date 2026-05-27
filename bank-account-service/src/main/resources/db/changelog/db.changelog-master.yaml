@@ -3,3 +3,5 @@ databaseChangeLog:
       file: db/changelog/0001-create-table-customer.sql
   - include:
       file: db/changelog/0002-create-table-account.sql
+  - include:
+      file: db/changelog/0003-handle-pk-account-table.sql
