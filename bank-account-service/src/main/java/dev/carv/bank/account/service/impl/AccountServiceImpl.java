@@ -26,9 +26,8 @@ public class AccountServiceImpl implements AccountService {
     @Override
     public void createAccount(CustomerDto dto) {
         var customer = customerMapper.toEntity(dto);
-
-        var savedCustomer = customerRepository.save(customer);
-        accountRepository.save(createAccount(savedCustomer));
+        customer.setAccount(createAccount(customer));
+        customerRepository.save(customer);
     }
 
     private AccountEntity createAccount(CustomerEntity customer) {

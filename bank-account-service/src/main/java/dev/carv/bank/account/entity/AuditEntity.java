@@ -3,24 +3,47 @@ package dev.carv.bank.account.entity;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.MappedSuperclass;
+import jakarta.persistence.PrePersist;
+import jakarta.persistence.PreUpdate;
 import lombok.Data;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.data.annotation.CreatedBy;
+import org.springframework.data.annotation.CreatedDate;
+import org.springframework.data.annotation.LastModifiedBy;
+import org.springframework.data.annotation.LastModifiedDate;
 
 import java.time.LocalDateTime;
+import java.time.ZoneOffset;
 
 @Data
 @MappedSuperclass
 public class AuditEntity {
 
+    @CreatedDate
     @Column(name = "CREATED_AT", updatable = false)
     private LocalDateTime createdAt;
 
-    @Column(name = "UPDATED_AT", updatable = false)
+    @LastModifiedDate
+    @Column(name = "UPDATED_AT", insertable = false)
     private LocalDateTime updatedAt;
 
-    @Column(name = "CREATED_BY", insertable = false)
-    private String createdBy;
+    @CreatedBy
+    @Column(name = "CREATED_BY")
+    private String createdBy = "bank-account-service";
 
+    @LastModifiedBy
+    @Value("${spring.application.name}")
     @Column(name = "UPDATED_BY", insertable = false)
     private String updatedBy;
+
+    @PrePersist
+    public void prePersist() {
+        createdAt = LocalDateTime.now(ZoneOffset.UTC);
+    }
+
+    @PreUpdate
+    public void preUpdate() {
+        updatedAt = LocalDateTime.now(ZoneOffset.UTC);
+    }
 
 }
