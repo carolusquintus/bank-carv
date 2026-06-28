@@ -15,6 +15,11 @@ spring:
     hibernate:
       ddl-auto: none
     show-sql: true
+    properties:
+      hibernate:
+        type:
+          preferred_uuid_jdbc_type: CHAR
+
   liquibase:
     enabled: true
     change-log: classpath:db/changelog/db.changelog-master.yaml
