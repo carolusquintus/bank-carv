@@ -19,22 +19,24 @@ import static dev.carv.bank.account.constant.AccountType.SAVINGS;
 @RequiredArgsConstructor
 public class AccountServiceImpl implements AccountService {
 
-    private final AccountRepository accountRepository;
     private final CustomerRepository customerRepository;
     private final CustomerMapper customerMapper;
 
     @Override
     public void createAccount(CustomerDto dto) {
         var customer = customerMapper.toEntity(dto);
-        customer.setAccount(createAccount(customer));
+        var account = createAccount();
+
+        account.setCustomer(customer);
+        customer.setAccount(account);
+
         customerRepository.save(customer);
     }
 
-    private AccountEntity createAccount(CustomerEntity customer) {
+    private AccountEntity createAccount() {
         var newAccount = new AccountEntity();
         long randomAccountNumber = 1_000_000_000L + new SecureRandom().nextInt(900_000_000);
 
-        newAccount.setCustomerId(customer.getId());
         newAccount.setNumber(randomAccountNumber);
         newAccount.setType(SAVINGS);
         newAccount.setBranchAddress("123 Main Street, New York");
