@@ -1,6 +1,5 @@
 package dev.carv.bank.account.entity;
 
-
 import jakarta.persistence.Column;
 import jakarta.persistence.MappedSuperclass;
 import jakarta.persistence.PrePersist;
@@ -15,25 +14,27 @@ import org.springframework.data.annotation.LastModifiedDate;
 import java.time.LocalDateTime;
 import java.time.ZoneOffset;
 
+import static dev.carv.bank.account.constant.DBConstants.*;
+
 @Data
 @MappedSuperclass
 public class AuditEntity {
 
     @CreatedDate
-    @Column(name = "CREATED_AT", updatable = false)
+    @Column(name = CREATED_AT, nullable = false, updatable = false)
     private LocalDateTime createdAt;
 
     @LastModifiedDate
-    @Column(name = "UPDATED_AT", insertable = false)
+    @Column(name = UPDATED_AT, insertable = false)
     private LocalDateTime updatedAt;
 
     @CreatedBy
-    @Column(name = "CREATED_BY")
+    @Column(name = CREATED_BY, nullable = false, updatable = false)
     private String createdBy = "bank-account-service";
 
     @LastModifiedBy
     @Value("${spring.application.name}")
-    @Column(name = "UPDATED_BY", insertable = false)
+    @Column(name = UPDATED_BY, insertable = false)
     private String updatedBy;
 
     @PrePersist
