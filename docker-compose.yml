@@ -2,16 +2,18 @@ name: bank-carv
 services:
   bank-account-db:
     container_name: bank-account-db
-    image: mcr.microsoft.com/mssql/server:2022-latest
+    image: mcr.microsoft.com/mssql/server:2025-latest
     environment:
       ACCEPT_EULA: Y
       MSSQL_SA_PASSWORD:
       MSSQL_PID: Developer
     ports:
-      - "1433:1433"
+      - "1444:1433"
     volumes:
       - bank-account-db-data:/var/opt/mssql
     restart: always
+    networks:
+      - bank-network
 
 networks:
   bank-network:
