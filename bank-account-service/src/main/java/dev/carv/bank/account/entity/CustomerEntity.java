@@ -3,6 +3,7 @@ package dev.carv.bank.account.entity;
 import dev.carv.bank.account.annotation.GeneratedUUIDv7;
 import jakarta.persistence.*;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 import lombok.ToString;
 
 import java.util.UUID;
@@ -14,6 +15,7 @@ import static jakarta.persistence.CascadeType.ALL;
 @Entity
 @Table(name = CUSTOMER)
 @ToString(callSuper = true)
+@EqualsAndHashCode(callSuper = true)
 public class CustomerEntity extends AuditEntity {
 
     @Id

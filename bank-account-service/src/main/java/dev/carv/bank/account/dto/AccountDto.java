@@ -1,7 +1,9 @@
 package dev.carv.bank.account.dto;
 
+import dev.carv.bank.account.constant.AccountType;
+
 public record AccountDto(
-    Long number,
-    String type,
+    Long accountNumber,
+    AccountType type,
     String branchAddress
 ) {}

@@ -5,12 +5,9 @@ import dev.carv.bank.account.dto.ResponseDto;
 import dev.carv.bank.account.service.AccountService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
-import static dev.carv.bank.account.constant.ResponseMessage.CREATED;
+import static dev.carv.bank.account.constant.ResponseMessage.ACCOUNT_CREATED;
 import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
 
 @RestController
@@ -26,8 +23,12 @@ public class AccountController {
         service.createAccount(dto);
 
         return ResponseEntity
-            .status(CREATED.getStatus())
-            .body(new ResponseDto(CREATED.getStatus(), CREATED.getMessage()));
+            .status(ACCOUNT_CREATED.getStatus())
+            .body(new ResponseDto(ACCOUNT_CREATED.getStatus().value(), ACCOUNT_CREATED.getMessage()));
+    }
+
+    @GetMapping("/fetch")
+    public ResponseEntity<CustomerDto> fetchAccountDetails() {
     }
 
 }

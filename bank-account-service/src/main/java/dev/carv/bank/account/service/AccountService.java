@@ -6,4 +6,6 @@ public interface AccountService {
 
     void createAccount(CustomerDto dto);
 
+    CustomerDto fetchAccount(String mobileNumber);
+
 }

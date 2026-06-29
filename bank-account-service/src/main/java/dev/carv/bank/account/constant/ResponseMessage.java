@@ -4,15 +4,20 @@ import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 
+import static org.springframework.http.HttpStatus.*;
+import static org.springframework.http.HttpStatus.INTERNAL_SERVER_ERROR;
+
 @Getter
 @RequiredArgsConstructor
 public enum ResponseMessage {
 
-    CREATED(HttpStatus.CREATED.value(), "Account created successfully"),
-    SUCCESS(HttpStatus.OK.value(), "Request processed successfulli"),
-    INTERNAL_ERROR(HttpStatus.INTERNAL_SERVER_ERROR.value(), "Error ocurred. Please contact support");
+    SUCCESS(OK, "Request processed successfully"),
+    ACCOUNT_CREATED(CREATED, "Account created successfully"),
+    CUSTOMER_ALREADY_EXISTS(BAD_REQUEST, "Customer already registered with given %s: %s"),
+    RESOURCE_NOT_FOUND(NOT_FOUND, "%s not found with given data %s: '%s'"),
+    INTERNAL_ERROR(INTERNAL_SERVER_ERROR, "Error occurred. Please contact support");
 
-    private final Integer status;
+    private final HttpStatus status;
     private final String message;
 
 }
