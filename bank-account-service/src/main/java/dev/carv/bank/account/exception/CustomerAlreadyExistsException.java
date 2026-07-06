@@ -8,7 +8,7 @@ import static org.springframework.http.HttpStatus.BAD_REQUEST;
 public class CustomerAlreadyExistsException extends RuntimeException {
 
     public CustomerAlreadyExistsException(String message, String... params) {
-        super(message.formatted((Object) params));
+        super(message.formatted(params));
     }
 
 }

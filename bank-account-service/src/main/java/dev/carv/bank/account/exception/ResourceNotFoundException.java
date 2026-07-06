@@ -8,7 +8,7 @@ import static org.springframework.http.HttpStatus.NOT_FOUND;
 public class ResourceNotFoundException extends RuntimeException {
 
     public ResourceNotFoundException(String message, String... params) {
-        super(message.formatted((Object) params));
+        super(message.formatted(params));
     }
 
 }
