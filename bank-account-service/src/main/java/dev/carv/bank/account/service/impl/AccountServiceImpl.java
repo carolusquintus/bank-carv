@@ -42,7 +42,7 @@ public class AccountServiceImpl implements AccountService {
     public CustomerDto fetchAccount(String mobileNumber) {
         return customerRepository.findByMobileNumberWithAccount(mobileNumber)
             .map(customerMapper::toDto)
-            .orElseThrow(() -> new ResourceNotFoundException(RESOURCE_NOT_FOUND.getMessage(), "mobileNumber", mobileNumber));
+            .orElseThrow(() -> new ResourceNotFoundException(RESOURCE_NOT_FOUND.getMessage(), "Customer", "mobileNumber", mobileNumber));
     }
 
     private AccountEntity createAccount() {
