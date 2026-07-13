@@ -8,4 +8,6 @@ public interface AccountService {
 
     CustomerDto fetchAccount(String mobileNumber);
 
+    boolean updateAccount(CustomerDto dto);
+
 }

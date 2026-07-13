@@ -7,7 +7,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import static dev.carv.bank.account.constant.ResponseMessage.ACCOUNT_CREATED;
+import static dev.carv.bank.account.constant.ResponseMessage.*;
 import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
 
 @RestController
@@ -28,8 +28,17 @@ public class AccountController {
     }
 
     @GetMapping("/fetch")
-    public ResponseEntity<CustomerDto> fetchAccountDetails(@RequestParam String mobileNumber) {
+    public ResponseEntity<CustomerDto> fetchAccount(@RequestParam String mobileNumber) {
         return ResponseEntity.ok(service.fetchAccount(mobileNumber));
+    }
+
+    @PutMapping("/update")
+    public ResponseEntity<ResponseDto> updateAccount(@RequestBody CustomerDto dto) {
+        if (service.updateAccount(dto)) {
+            return ResponseEntity.ok(new ResponseDto(SUCCESS.getStatus().value(), SUCCESS.getMessage()));
+        }
+        return ResponseEntity
+            .internalServerError().body(new ResponseDto(INTERNAL_ERROR.getStatus().value(), INTERNAL_ERROR.getMessage()));
     }
 
 }

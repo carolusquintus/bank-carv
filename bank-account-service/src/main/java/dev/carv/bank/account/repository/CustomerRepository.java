@@ -14,7 +14,12 @@ public interface CustomerRepository extends JpaRepository<CustomerEntity, UUID> 
 
     boolean existsByMobileNumber(String mobileNumber);
 
-    @Query("SELECT c FROM CustomerEntity c LEFT JOIN FETCH c.account WHERE c.mobileNumber = :mobileNumber")
+    @Query("""
+        SELECT c
+        FROM CustomerEntity c
+        LEFT JOIN FETCH c.account
+        WHERE c.mobileNumber = :mobileNumber
+    """)
     Optional<CustomerEntity> findByMobileNumberWithAccount(@Param("mobileNumber") String mobileNumber);
 
 }

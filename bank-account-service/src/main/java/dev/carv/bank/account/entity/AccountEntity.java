@@ -10,6 +10,7 @@ import org.hibernate.annotations.Generated;
 import java.util.UUID;
 
 import static dev.carv.bank.account.constant.DBConstants.*;
+import static jakarta.persistence.CascadeType.MERGE;
 import static jakarta.persistence.EnumType.STRING;
 import static jakarta.persistence.FetchType.LAZY;
 import static org.hibernate.generator.EventType.INSERT;
@@ -37,8 +38,9 @@ public class AccountEntity extends AuditEntity {
     private String branchAddress;
 
     @MapsId
-    @OneToOne(fetch = LAZY)
+    @OneToOne(cascade = MERGE, fetch = LAZY)
     @JoinColumn(name = CUSTOMER_ID)
+    @ToString.Exclude
     private CustomerEntity customer;
 
 }

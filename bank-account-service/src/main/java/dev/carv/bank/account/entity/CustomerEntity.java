@@ -33,6 +33,7 @@ public class CustomerEntity extends AuditEntity {
     private String mobileNumber;
 
     @OneToOne(mappedBy = "customer", cascade = ALL, orphanRemoval = true)
+    @ToString.Exclude
     private AccountEntity account;
 
 }
