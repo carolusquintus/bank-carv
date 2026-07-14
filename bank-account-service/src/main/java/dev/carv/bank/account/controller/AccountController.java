@@ -12,12 +12,12 @@ import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
 
 @RestController
 @RequiredArgsConstructor
-@RequestMapping(path = "/api", produces = { APPLICATION_JSON_VALUE})
+@RequestMapping(path = "/api/account", produces = { APPLICATION_JSON_VALUE})
 public class AccountController {
 
     private final AccountService service;
 
-    @PostMapping("/create")
+    @PostMapping
     public ResponseEntity<ResponseDto> create(@RequestBody CustomerDto dto) {
 
         service.createAccount(dto);
@@ -27,12 +27,12 @@ public class AccountController {
             .body(new ResponseDto(ACCOUNT_CREATED.getStatus().value(), ACCOUNT_CREATED.getMessage()));
     }
 
-    @GetMapping("/fetch")
+    @GetMapping
     public ResponseEntity<CustomerDto> fetchAccount(@RequestParam String mobileNumber) {
         return ResponseEntity.ok(service.fetchAccount(mobileNumber));
     }
 
-    @PutMapping("/update")
+    @PutMapping
     public ResponseEntity<ResponseDto> updateAccount(@RequestBody CustomerDto dto) {
         if (service.updateAccount(dto)) {
             return ResponseEntity.ok(new ResponseDto(SUCCESS.getStatus().value(), SUCCESS.getMessage()));
@@ -41,7 +41,7 @@ public class AccountController {
             .internalServerError().body(new ResponseDto(INTERNAL_ERROR.getStatus().value(), INTERNAL_ERROR.getMessage()));
     }
 
-    @DeleteMapping("/delete")
+    @DeleteMapping
     public ResponseEntity<ResponseDto> deleteAccount(@RequestParam String mobileNumber) {
         if (service.deleteAccount(mobileNumber)) {
             return ResponseEntity.ok(new ResponseDto(SUCCESS.getStatus().value(), SUCCESS.getMessage()));
