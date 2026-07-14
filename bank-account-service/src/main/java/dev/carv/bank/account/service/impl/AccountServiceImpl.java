@@ -25,7 +25,6 @@ import static dev.carv.bank.account.constant.ResponseMessage.RESOURCE_NOT_FOUND;
 @RequiredArgsConstructor
 public class AccountServiceImpl implements AccountService {
 
-    private final AccountMapper accountMapper;
     private final CustomerMapper customerMapper;
     private final AccountRepository accountRepository;
     private final CustomerRepository customerRepository;
