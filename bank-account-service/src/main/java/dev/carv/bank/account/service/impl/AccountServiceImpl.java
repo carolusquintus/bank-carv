@@ -1,12 +1,9 @@
 package dev.carv.bank.account.service.impl;
 
-import dev.carv.bank.account.constant.ResponseMessage;
 import dev.carv.bank.account.dto.CustomerDto;
 import dev.carv.bank.account.entity.AccountEntity;
-import dev.carv.bank.account.entity.CustomerEntity;
 import dev.carv.bank.account.exception.CustomerAlreadyExistsException;
 import dev.carv.bank.account.exception.ResourceNotFoundException;
-import dev.carv.bank.account.mapper.AccountMapper;
 import dev.carv.bank.account.mapper.CustomerMapper;
 import dev.carv.bank.account.repository.AccountRepository;
 import dev.carv.bank.account.repository.CustomerRepository;
