@@ -5,11 +5,13 @@ import dev.carv.bank.account.dto.ResponseDto;
 import dev.carv.bank.account.service.AccountService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import static dev.carv.bank.account.constant.ResponseMessage.*;
 import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
 
+@Validated
 @RestController
 @RequiredArgsConstructor
 @RequestMapping(path = "/api/account", produces = { APPLICATION_JSON_VALUE})

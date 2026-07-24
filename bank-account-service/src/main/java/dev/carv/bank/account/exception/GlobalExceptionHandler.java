@@ -8,11 +8,21 @@ import org.springframework.web.context.request.WebRequest;
 
 import java.time.LocalDateTime;
 
-import static dev.carv.bank.account.constant.ResponseMessage.CUSTOMER_ALREADY_EXISTS;
-import static dev.carv.bank.account.constant.ResponseMessage.RESOURCE_NOT_FOUND;
+import static dev.carv.bank.account.constant.ResponseMessage.*;
 
 @ControllerAdvice
 public class GlobalExceptionHandler {
+
+    @ExceptionHandler(Exception.class)
+    public ResponseEntity<ErrorResponseDto> handleGlobalException(Exception exception,
+                                                                  WebRequest webRequest) {
+        return new ResponseEntity<>(new ErrorResponseDto(
+            webRequest.getDescription(false),
+            INTERNAL_ERROR.getStatus(),
+            exception.getMessage(),
+            LocalDateTime.now()
+        ), INTERNAL_ERROR.getStatus());
+    }
 
     @ExceptionHandler(CustomerAlreadyExistsException.class)
     public ResponseEntity<ErrorResponseDto> handleCustomerAlreadyExistsException(CustomerAlreadyExistsException exception,
