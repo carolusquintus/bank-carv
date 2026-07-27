@@ -5,6 +5,8 @@ import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.Pattern;
 import jakarta.validation.constraints.Size;
 
+import static dev.carv.bank.account.constant.ValidationConstants.MOBILE_NUMBER_REGEX;
+
 public record CustomerDto(
 
     @NotEmpty(message = "name can not be null or empty")
@@ -15,7 +17,7 @@ public record CustomerDto(
     @Email(message = "Email address should be a valid value")
     String email,
 
-    @Pattern(regexp = "(^$|[0-9]{10})", message = "mobileNumber must be 10 digits")
+    @Pattern(regexp = MOBILE_NUMBER_REGEX, message = "mobileNumber must be 12 digits")
     String mobileNumber,
 
     AccountDto account

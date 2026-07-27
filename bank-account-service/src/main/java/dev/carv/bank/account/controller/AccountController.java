@@ -1,14 +1,18 @@
 package dev.carv.bank.account.controller;
 
+import dev.carv.bank.account.constant.ValidationConstants;
 import dev.carv.bank.account.dto.CustomerDto;
 import dev.carv.bank.account.dto.ResponseDto;
 import dev.carv.bank.account.service.AccountService;
+import jakarta.validation.Valid;
+import jakarta.validation.constraints.Pattern;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import static dev.carv.bank.account.constant.ResponseMessage.*;
+import static dev.carv.bank.account.constant.ValidationConstants.MOBILE_NUMBER_REGEX;
 import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
 
 @Validated
@@ -20,7 +24,7 @@ public class AccountController {
     private final AccountService service;
 
     @PostMapping
-    public ResponseEntity<ResponseDto> create(@RequestBody CustomerDto dto) {
+    public ResponseEntity<ResponseDto> create(@Valid @RequestBody CustomerDto dto) {
 
         service.createAccount(dto);
 
@@ -30,12 +34,14 @@ public class AccountController {
     }
 
     @GetMapping
-    public ResponseEntity<CustomerDto> fetchAccount(@RequestParam String mobileNumber) {
+    public ResponseEntity<CustomerDto> fetchAccount(@RequestParam
+                                                    @Pattern(regexp = MOBILE_NUMBER_REGEX, message = "mobileNumber must be 12 digits")
+                                                    String mobileNumber) {
         return ResponseEntity.ok(service.fetchAccount(mobileNumber));
     }
 
     @PutMapping
-    public ResponseEntity<ResponseDto> updateAccount(@RequestBody CustomerDto dto) {
+    public ResponseEntity<ResponseDto> updateAccount(@Valid @RequestBody CustomerDto dto) {
         if (service.updateAccount(dto)) {
             return ResponseEntity.ok(new ResponseDto(SUCCESS.getStatus().value(), SUCCESS.getMessage()));
         }
@@ -44,7 +50,9 @@ public class AccountController {
     }
 
     @DeleteMapping
-    public ResponseEntity<ResponseDto> deleteAccount(@RequestParam String mobileNumber) {
+    public ResponseEntity<ResponseDto> deleteAccount(@RequestParam
+                                                     @Pattern(regexp = MOBILE_NUMBER_REGEX, message = "mobileNumber must be 12 digits")
+                                                     String mobileNumber) {
         if (service.deleteAccount(mobileNumber)) {
             return ResponseEntity.ok(new ResponseDto(SUCCESS.getStatus().value(), SUCCESS.getMessage()));
         }

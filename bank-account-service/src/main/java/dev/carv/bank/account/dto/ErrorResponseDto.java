@@ -6,8 +6,8 @@ import java.time.LocalDateTime;
 
 public record ErrorResponseDto(
     String path,
-    HttpStatus errorCode,
-    String errorMessage,
-    LocalDateTime errorT
+    HttpStatus status,
+    Object error,
+    LocalDateTime timestamp
 ) {
 }
