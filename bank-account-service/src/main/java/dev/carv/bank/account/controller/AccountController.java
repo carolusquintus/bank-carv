@@ -1,6 +1,6 @@
 package dev.carv.bank.account.controller;
 
-import dev.carv.bank.account.constant.ValidationConstants;
+import dev.carv.bank.account.api.AccountAPI;
 import dev.carv.bank.account.dto.CustomerDto;
 import dev.carv.bank.account.dto.ResponseDto;
 import dev.carv.bank.account.service.AccountService;
@@ -19,25 +19,18 @@ import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
 @RestController
 @RequiredArgsConstructor
 @RequestMapping(path = "/api/account", produces = { APPLICATION_JSON_VALUE})
-public class AccountController {
+public class AccountController implements AccountAPI {
 
     private final AccountService service;
 
     @PostMapping
-    public ResponseEntity<ResponseDto> create(@Valid @RequestBody CustomerDto dto) {
+    public ResponseEntity<ResponseDto> createAccount(@Valid @RequestBody CustomerDto dto) {
 
         service.createAccount(dto);
 
         return ResponseEntity
             .status(ACCOUNT_CREATED.getStatus())
             .body(new ResponseDto(ACCOUNT_CREATED.getStatus().value(), ACCOUNT_CREATED.getMessage()));
-    }
-
-    @GetMapping
-    public ResponseEntity<CustomerDto> fetchAccount(@RequestParam
-                                                    @Pattern(regexp = MOBILE_NUMBER_REGEX, message = "mobileNumber must be 12 digits")
-                                                    String mobileNumber) {
-        return ResponseEntity.ok(service.fetchAccount(mobileNumber));
     }
 
     @PutMapping
@@ -47,6 +40,13 @@ public class AccountController {
         }
         return ResponseEntity
             .internalServerError().body(new ResponseDto(INTERNAL_ERROR.getStatus().value(), INTERNAL_ERROR.getMessage()));
+    }
+
+    @GetMapping
+    public ResponseEntity<CustomerDto> fetchAccount(@RequestParam
+                                                    @Pattern(regexp = MOBILE_NUMBER_REGEX, message = "mobileNumber must be 12 digits")
+                                                    String mobileNumber) {
+        return ResponseEntity.ok(service.fetchAccount(mobileNumber));
     }
 
     @DeleteMapping
