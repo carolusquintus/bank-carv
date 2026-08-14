@@ -1,8 +1,11 @@
 package dev.carv.bank.account.api;
 
 import dev.carv.bank.account.dto.CustomerDto;
+import dev.carv.bank.account.dto.ErrorResponseDto;
 import dev.carv.bank.account.dto.ResponseDto;
 import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.media.Content;
+import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.http.ResponseEntity;
@@ -17,10 +20,10 @@ public interface AccountAPI {
         summary = "Create account endpoint",
         description = "REST operation to create a new customer and account inside Bank CARV",
         responses = {
-             @ApiResponse(
-                 responseCode = "201",
-                 description = "Account Created"
-             )
+            @ApiResponse(
+                responseCode = "201",
+                description = "Account Created"
+            )
         }
     )
     ResponseEntity<ResponseDto> createAccount(CustomerDto dto);
@@ -39,7 +42,10 @@ public interface AccountAPI {
             ),
             @ApiResponse(
                 responseCode = "500",
-                description = "Internal Server Error"
+                description = "Internal Server Error",
+                content = @Content(
+                    schema = @Schema(implementation = ErrorResponseDto.class)
+                )
             )
         }
     )
@@ -59,7 +65,9 @@ public interface AccountAPI {
             ),
             @ApiResponse(
                 responseCode = "500",
-                description = "Internal Server Error"
+                description = "Internal Server Error",
+                content = @Content(
+                    schema = @Schema(implementation = ErrorResponseDto.class))
             )
         }
     )
@@ -79,7 +87,10 @@ public interface AccountAPI {
             ),
             @ApiResponse(
                 responseCode = "500",
-                description = "Internal Server Error"
+                description = "Internal Server Error",
+                content = @Content(
+                    schema = @Schema(implementation = ErrorResponseDto.class)
+                )
             )
         }
     )
