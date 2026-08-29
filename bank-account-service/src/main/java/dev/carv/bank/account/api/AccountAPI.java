@@ -9,7 +9,12 @@ import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
+import jakarta.validation.constraints.Pattern;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestParam;
+
+import static dev.carv.bank.account.constant.ValidationConstants.MOBILE_NUMBER_REGEX;
 
 @Tag(
     name = "CRUD Account API for Bank CARV",
@@ -27,7 +32,9 @@ public interface AccountAPI {
             )
         }
     )
-    ResponseEntity<ResponseDto> createAccount(@Valid CustomerDto dto);
+    ResponseEntity<ResponseDto> createAccount(@Valid
+                                              @RequestBody
+                                              CustomerDto dto);
 
     @Operation(
         summary = "Update account endpoint",
@@ -50,7 +57,9 @@ public interface AccountAPI {
             )
         }
     )
-    ResponseEntity<ResponseDto> updateAccount(CustomerDto dto);
+    ResponseEntity<ResponseDto> updateAccount(@Valid
+                                              @RequestBody
+                                              CustomerDto dto);
 
     @Operation(
         summary = "Delete account endpoint",
@@ -72,7 +81,9 @@ public interface AccountAPI {
             )
         }
     )
-    ResponseEntity<CustomerDto> fetchAccount(String mobileNumber);
+    ResponseEntity<CustomerDto> fetchAccount(@RequestParam
+                                             @Pattern(regexp = MOBILE_NUMBER_REGEX, message = "mobileNumber must be 12 digits")
+                                             String mobileNumber);
 
     @Operation(
         summary = "Fetch account endpoint",
@@ -95,6 +106,8 @@ public interface AccountAPI {
             )
         }
     )
-    ResponseEntity<ResponseDto> deleteAccount(String mobileNumber);
+    ResponseEntity<ResponseDto> deleteAccount(@RequestParam
+                                              @Pattern(regexp = MOBILE_NUMBER_REGEX, message = "mobileNumber must be 12 digits")
+                                              String mobileNumber);
 
 }

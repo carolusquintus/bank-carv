@@ -24,7 +24,7 @@ public class AccountController implements AccountAPI {
     private final AccountService service;
 
     @PostMapping
-    public ResponseEntity<ResponseDto> createAccount(@RequestBody CustomerDto dto) {
+    public ResponseEntity<ResponseDto> createAccount(CustomerDto dto) {
 
         service.createAccount(dto);
 
@@ -34,7 +34,7 @@ public class AccountController implements AccountAPI {
     }
 
     @PutMapping
-    public ResponseEntity<ResponseDto> updateAccount(@Valid @RequestBody CustomerDto dto) {
+    public ResponseEntity<ResponseDto> updateAccount(CustomerDto dto) {
         if (service.updateAccount(dto)) {
             return ResponseEntity.ok(new ResponseDto(SUCCESS.getStatus().value(), SUCCESS.getMessage()));
         }
@@ -43,16 +43,12 @@ public class AccountController implements AccountAPI {
     }
 
     @GetMapping
-    public ResponseEntity<CustomerDto> fetchAccount(@RequestParam
-                                                    @Pattern(regexp = MOBILE_NUMBER_REGEX, message = "mobileNumber must be 12 digits")
-                                                    String mobileNumber) {
+    public ResponseEntity<CustomerDto> fetchAccount(String mobileNumber) {
         return ResponseEntity.ok(service.fetchAccount(mobileNumber));
     }
 
     @DeleteMapping
-    public ResponseEntity<ResponseDto> deleteAccount(@RequestParam
-                                                     @Pattern(regexp = MOBILE_NUMBER_REGEX, message = "mobileNumber must be 12 digits")
-                                                     String mobileNumber) {
+    public ResponseEntity<ResponseDto> deleteAccount(String mobileNumber) {
         if (service.deleteAccount(mobileNumber)) {
             return ResponseEntity.ok(new ResponseDto(SUCCESS.getStatus().value(), SUCCESS.getMessage()));
         }
