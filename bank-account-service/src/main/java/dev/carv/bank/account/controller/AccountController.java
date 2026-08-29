@@ -24,7 +24,7 @@ public class AccountController implements AccountAPI {
     private final AccountService service;
 
     @PostMapping
-    public ResponseEntity<ResponseDto> createAccount(@Valid @RequestBody CustomerDto dto) {
+    public ResponseEntity<ResponseDto> createAccount(@RequestBody CustomerDto dto) {
 
         service.createAccount(dto);
 
