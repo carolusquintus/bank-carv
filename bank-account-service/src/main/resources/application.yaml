@@ -10,7 +10,7 @@ spring:
     url: jdbc:sqlserver://localhost:1444;database=bank-account-db;encrypt=true;trustServerCertificate=true;
     driver-class-name: com.microsoft.sqlserver.jdbc.SQLServerDriver
     username: sa
-    password: kNhiMcy61ut5!
+    password:
   jpa:
     hibernate:
       ddl-auto: none
