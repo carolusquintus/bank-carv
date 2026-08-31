@@ -15,6 +15,21 @@ services:
     networks:
       - bank-network
 
+  bank-card-db:
+    container_name: bank-card-db
+    image: mcr.microsoft.com/mssql/server:2025-latest
+    environment:
+      ACCEPT_EULA: Y
+      MSSQL_SA_PASSWORD:
+      MSSQL_PID: Developer
+    ports:
+      - "1445:1433"
+    volumes:
+      - bank-card-db-data:/var/opt/mssql
+    restart: always
+    networks:
+      - bank-network
+
 networks:
   bank-network:
     name: bank-network
@@ -22,4 +37,6 @@ networks:
 volumes:
   bank-account-db-data:
     name: bank-account-db-data
+  bank-card-db-data:
+    name: bank-card-db-data
 
