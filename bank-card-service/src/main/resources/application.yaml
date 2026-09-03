@@ -1,0 +1,25 @@
+server:
+  port: 8082
+  servlet:
+    context-path: /card-service
+
+spring:
+  application:
+    name: bank-card-service
+  datasource:
+    url: jdbc:sqlserver://localhost:1445;database=bank-card-db;encrypt=true;trustServerCertificate=true;
+    driver-class-name: com.microsoft.sqlserver.jdbc.SQLServerDriver
+    username: sa
+    password: o0nC03iWk5H$
+  jpa:
+    hibernate:
+      ddl-auto: none
+    show-sql: true
+    properties:
+      hibernate:
+        type:
+          preferred_uuid_jdbc_type: CHAR
+
+  liquibase:
+    enabled: true
+    change-log: classpath:db/changelog/db.changelog-master.yaml
