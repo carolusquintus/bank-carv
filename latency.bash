@@ -10,13 +10,13 @@ docker exec -it --user root bank-account-db apt-get update
 docker exec -it --user root bank-account-db apt-get install -y iproute2
 
 # apply latency command
-docker exec -it --user root bank-account-db tc qdisc add dev eth0 root netem delay 1000ms
+docker exec -it --user root bank-account-db tc qdisc add dev eth0 root netem delay 2000ms
 
 # change latency
-docker exec -it --user root bank-account-db tc qdisc change dev eth0 root netem delay 2500ms
+#docker exec -it --user root bank-account-db tc qdisc change dev eth0 root netem delay 5000ms
 
 # remove latency
-docker exec -it --user root bank-account-db tc qdisc del dev eth0 root netem
+#docker exec -it --user root bank-account-db tc qdisc del dev eth0 root netem
 
 # Just in case if a port is being used
 #sudo lsof -i TCP:<PORT> -sTCP:LISTEN
