@@ -14,6 +14,8 @@ services:
     restart: always
     networks:
       - bank-network
+    cap_add:
+      - NET_ADMIN
 
   bank-card-db:
     container_name: bank-card-db
