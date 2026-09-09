@@ -1,6 +1,7 @@
 package dev.carv.bank.account.entity;
 
-import dev.carv.bank.account.annotation.GeneratedUUIDv7;
+import dev.carv.bank.commons.annotation.GeneratedUUIDv7;
+import dev.carv.bank.commons.entity.AuditEntity;
 import jakarta.persistence.*;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -8,7 +9,7 @@ import lombok.ToString;
 
 import java.util.UUID;
 
-import static dev.carv.bank.account.constant.DBConstants.*;
+import static dev.carv.bank.account.constant.AccountColumns.*;
 import static jakarta.persistence.CascadeType.ALL;
 
 @Data

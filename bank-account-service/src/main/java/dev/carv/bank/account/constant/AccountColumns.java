@@ -1,6 +1,6 @@
 package dev.carv.bank.account.constant;
 
-public final class DBConstants {
+public final class AccountColumns {
 
     public static final String CUSTOMER = "CUSTOMER";
     public static final String ID = "ID";
@@ -13,10 +13,5 @@ public final class DBConstants {
     public static final String ACCOUNT_NUMBER = "ACCOUNT_NUMBER";
     public static final String TYPE = "TYPE";
     public static final String BRANCH_ADDRESS = "BRANCH_ADDRESS";
-
-    public static final String CREATED_AT = "CREATED_AT";
-    public static final String UPDATED_AT = "UPDATED_AT";
-    public static final String CREATED_BY = "CREATED_BY";
-    public static final String UPDATED_BY = "UPDATED_BY";
 
 }

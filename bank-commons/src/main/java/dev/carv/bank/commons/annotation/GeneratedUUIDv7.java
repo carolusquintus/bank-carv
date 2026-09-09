@@ -1,5 +1,6 @@
-package dev.carv.bank.account.annotation;
+package dev.carv.bank.commons.annotation;
 
+import dev.carv.bank.commons.generator.UUIDv7Generator;
 import org.hibernate.annotations.IdGeneratorType;
 
 import java.lang.annotation.Retention;

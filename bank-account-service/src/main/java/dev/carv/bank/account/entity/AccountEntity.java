@@ -1,6 +1,7 @@
 package dev.carv.bank.account.entity;
 
 import dev.carv.bank.account.constant.AccountType;
+import dev.carv.bank.commons.entity.AuditEntity;
 import jakarta.persistence.*;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -9,7 +10,7 @@ import org.hibernate.annotations.Generated;
 
 import java.util.UUID;
 
-import static dev.carv.bank.account.constant.DBConstants.*;
+import static dev.carv.bank.account.constant.AccountColumns.*;
 import static jakarta.persistence.CascadeType.MERGE;
 import static jakarta.persistence.EnumType.STRING;
 import static jakarta.persistence.FetchType.LAZY;

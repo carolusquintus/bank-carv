@@ -1,6 +1,6 @@
-package dev.carv.bank.account.annotation;
+package dev.carv.bank.commons.generator;
 
-import dev.carv.bank.account.util.UUIDv7;
+import dev.carv.bank.commons.util.UUIDv7;
 import org.hibernate.engine.spi.SharedSessionContractImplementor;
 import org.hibernate.generator.BeforeExecutionGenerator;
 import org.hibernate.generator.EventType;
