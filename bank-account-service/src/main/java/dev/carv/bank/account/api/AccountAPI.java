@@ -1,8 +1,8 @@
 package dev.carv.bank.account.api;
 
 import dev.carv.bank.account.dto.CustomerDto;
-import dev.carv.bank.account.dto.ErrorResponseDto;
-import dev.carv.bank.account.dto.ResponseDto;
+import dev.carv.bank.commons.dto.ErrorResponseDto;
+import dev.carv.bank.commons.dto.ResponseDto;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;

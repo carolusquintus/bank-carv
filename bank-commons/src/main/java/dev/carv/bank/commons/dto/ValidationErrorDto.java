@@ -1,4 +1,4 @@
-package dev.carv.bank.account.dto;
+package dev.carv.bank.commons.dto;
 
 import org.springframework.validation.FieldError;
 import org.springframework.validation.ObjectError;

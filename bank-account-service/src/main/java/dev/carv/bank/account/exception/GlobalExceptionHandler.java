@@ -1,7 +1,7 @@
 package dev.carv.bank.account.exception;
 
-import dev.carv.bank.account.dto.ErrorResponseDto;
-import dev.carv.bank.account.dto.ValidationErrorDto;
+import dev.carv.bank.commons.dto.ErrorResponseDto;
+import dev.carv.bank.commons.dto.ValidationErrorDto;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ResponseEntity;

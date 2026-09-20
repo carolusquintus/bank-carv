@@ -1,4 +1,4 @@
-package dev.carv.bank.account.dto;
+package dev.carv.bank.commons.dto;
 
 import io.swagger.v3.oas.annotations.media.Schema;
 
