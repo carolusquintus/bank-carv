@@ -7,11 +7,10 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.ToString;
 
+import java.math.BigDecimal;
 import java.util.UUID;
 
-import static dev.carv.bank.account.constant.AccountColumns.*;
 import static dev.carv.bank.card.constant.CardConstant.*;
-import static jakarta.persistence.CascadeType.ALL;
 
 @Data
 @Entity
@@ -31,12 +30,17 @@ public class CardEntity extends AuditEntity {
     @Column(name = CARD_NUMBER, nullable = false)
     private String cardNumber;
 
-    @Column(name = MOBILE_NUMBER, nullable = false)
-    private String mobileNumber;
+    @Column(name = TYPE, nullable = false)
+    private String type;
 
-    @OneToOne(mappedBy = "customer", cascade = ALL, orphanRemoval = true)
-    @ToString.Exclude
-    private AccountEntity account;
+    @Column(name = LIMIT_AMOUNT, nullable = false)
+    private BigDecimal limitAmount;
+
+    @Column(name = USED_AMOUNT, nullable = false)
+    private BigDecimal usedAmount;
+
+    @Column(name = AVAILABLE_AMOUNT, nullable = false)
+    private BigDecimal availableAmount;
 
 }
 
