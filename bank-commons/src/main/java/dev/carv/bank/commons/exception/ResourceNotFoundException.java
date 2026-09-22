@@ -1,4 +1,4 @@
-package dev.carv.bank.account.exception;
+package dev.carv.bank.commons.exception;
 
 import org.springframework.web.bind.annotation.ResponseStatus;
 

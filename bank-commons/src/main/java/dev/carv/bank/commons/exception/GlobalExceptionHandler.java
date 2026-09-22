@@ -1,4 +1,4 @@
-package dev.carv.bank.account.exception;
+package dev.carv.bank.commons.exception;
 
 import dev.carv.bank.commons.dto.ErrorResponseDto;
 import dev.carv.bank.commons.dto.ValidationErrorDto;
@@ -16,7 +16,7 @@ import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExcep
 
 import java.time.LocalDateTime;
 
-import static dev.carv.bank.account.constant.ResponseMessage.*;
+import static dev.carv.bank.commons.constant.ResponseMessage.*;
 
 @ControllerAdvice
 public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
@@ -39,10 +39,10 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
 
         return new ResponseEntity<>(new ErrorResponseDto(
             webRequest.getDescription(false),
-            CUSTOMER_VALIDATION.getStatus(),
+            RESOURCE_VALIDATION.getStatus(),
             validationErrors,
             LocalDateTime.now()
-        ), CUSTOMER_VALIDATION.getStatus());
+        ), RESOURCE_VALIDATION.getStatus());
     }
 
     @ExceptionHandler(Exception.class)
@@ -56,15 +56,15 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
         ), INTERNAL_ERROR.getStatus());
     }
 
-    @ExceptionHandler(CustomerAlreadyExistsException.class)
-    public ResponseEntity<ErrorResponseDto> handleCustomerAlreadyExistsException(CustomerAlreadyExistsException exception,
+    @ExceptionHandler(ResourceAlreadyExistsException.class)
+    public ResponseEntity<ErrorResponseDto> handleResourceAlreadyExistsException(ResourceAlreadyExistsException exception,
                                                                                  WebRequest webRequest) {
         return new ResponseEntity<>(new ErrorResponseDto(
             webRequest.getDescription(false),
-            CUSTOMER_ALREADY_EXISTS.getStatus(),
+            RESOURCE_ALREADY_EXISTS.getStatus(),
             exception.getMessage(),
             LocalDateTime.now()
-        ), CUSTOMER_ALREADY_EXISTS.getStatus());
+        ), RESOURCE_ALREADY_EXISTS.getStatus());
     }
 
     @ExceptionHandler(ResourceNotFoundException.class)

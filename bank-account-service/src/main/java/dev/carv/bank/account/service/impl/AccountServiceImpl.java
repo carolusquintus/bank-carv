@@ -2,8 +2,8 @@ package dev.carv.bank.account.service.impl;
 
 import dev.carv.bank.account.dto.CustomerDto;
 import dev.carv.bank.account.entity.AccountEntity;
-import dev.carv.bank.account.exception.CustomerAlreadyExistsException;
-import dev.carv.bank.account.exception.ResourceNotFoundException;
+import dev.carv.bank.commons.exception.ResourceAlreadyExistsException;
+import dev.carv.bank.commons.exception.ResourceNotFoundException;
 import dev.carv.bank.account.mapper.CustomerMapper;
 import dev.carv.bank.account.repository.AccountRepository;
 import dev.carv.bank.account.repository.CustomerRepository;
@@ -14,8 +14,8 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
 import static dev.carv.bank.account.constant.AccountType.SAVINGS;
-import static dev.carv.bank.account.constant.ResponseMessage.CUSTOMER_ALREADY_EXISTS;
-import static dev.carv.bank.account.constant.ResponseMessage.RESOURCE_NOT_FOUND;
+import static dev.carv.bank.commons.constant.ResponseMessage.RESOURCE_ALREADY_EXISTS;
+import static dev.carv.bank.commons.constant.ResponseMessage.RESOURCE_NOT_FOUND;
 
 @Slf4j
 @Service
@@ -31,7 +31,7 @@ public class AccountServiceImpl implements AccountService {
         var customer = customerMapper.toEntity(dto);
 
         if (customerRepository.existsByMobileNumber(customer.getMobileNumber())) {
-            throw new CustomerAlreadyExistsException(CUSTOMER_ALREADY_EXISTS.getMessage(), "mobileNumber", customer.getMobileNumber());
+            throw new ResourceAlreadyExistsException(RESOURCE_ALREADY_EXISTS.getMessage(), "Customer", "mobileNumber", customer.getMobileNumber());
         }
 
         var account = createAccount();
