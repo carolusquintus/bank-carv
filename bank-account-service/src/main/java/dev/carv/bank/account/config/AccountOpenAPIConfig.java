@@ -9,10 +9,10 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 @Configuration
-public class OpenAPIConfig {
+public class AccountOpenAPIConfig {
 
     @Bean
-    public OpenAPI bankAccountOpenAPI() {
+    public OpenAPI accountOpenAPI() {
         return new OpenAPI()
             .info(new Info()
                 .title("Accounts REST API Documentation")
