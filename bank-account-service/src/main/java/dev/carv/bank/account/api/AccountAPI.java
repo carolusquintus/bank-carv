@@ -14,7 +14,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import static dev.carv.bank.account.constant.ValidationConstants.MOBILE_NUMBER_REGEX;
+import static dev.carv.bank.commons.constant.ValidationConstants.MOBILE_NUMBER_REGEX;
 
 @Tag(
     name = "CRUD Account API for Bank CARV",

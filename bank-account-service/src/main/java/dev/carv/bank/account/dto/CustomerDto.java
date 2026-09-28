@@ -6,7 +6,7 @@ import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.Pattern;
 import jakarta.validation.constraints.Size;
 
-import static dev.carv.bank.account.constant.ValidationConstants.MOBILE_NUMBER_REGEX;
+import static dev.carv.bank.commons.constant.ValidationConstants.MOBILE_NUMBER_REGEX;
 
 @Schema(
     name = "Customer",
