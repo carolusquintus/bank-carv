@@ -1,5 +1,6 @@
 package dev.carv.bank.card.entity;
 
+import dev.carv.bank.card.constant.CardType;
 import dev.carv.bank.commons.annotation.GeneratedUUIDv7;
 import dev.carv.bank.commons.entity.AuditEntity;
 import jakarta.persistence.*;
@@ -11,6 +12,7 @@ import java.math.BigDecimal;
 import java.util.UUID;
 
 import static dev.carv.bank.card.constant.CardConstant.*;
+import static jakarta.persistence.EnumType.STRING;
 
 @Data
 @Entity
@@ -30,8 +32,9 @@ public class CardEntity extends AuditEntity {
     @Column(name = CARD_NUMBER, nullable = false)
     private String cardNumber;
 
+    @Enumerated(STRING)
     @Column(name = TYPE, nullable = false)
-    private String type;
+    private CardType type;
 
     @Column(name = LIMIT_AMOUNT, nullable = false)
     private BigDecimal limitAmount;
