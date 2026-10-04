@@ -62,6 +62,31 @@ public interface AccountAPI {
                                               CustomerDto dto);
 
     @Operation(
+        summary = "Fetch account endpoint",
+        description = "REST operation to fetch customer and account details based on a mobile number",
+        responses = {
+            @ApiResponse(
+                responseCode = "200",
+                description = "Account OK"
+            ),
+            @ApiResponse(
+                responseCode = "404",
+                description = "Account Not Found"
+            ),
+            @ApiResponse(
+                responseCode = "500",
+                description = "Internal Server Error",
+                content = @Content(
+                    schema = @Schema(implementation = ErrorResponseDto.class)
+                )
+            )
+        }
+    )
+    ResponseEntity<CustomerDto> fetchAccount(@RequestParam
+                                             @Pattern(regexp = MOBILE_NUMBER_REGEX, message = "mobileNumber must be 12 digits")
+                                             String mobileNumber);
+
+    @Operation(
         summary = "Delete account endpoint",
         description = "REST operation to delete customer and account details based on a mobile number",
         responses = {
@@ -78,31 +103,6 @@ public interface AccountAPI {
                 description = "Internal Server Error",
                 content = @Content(
                     schema = @Schema(implementation = ErrorResponseDto.class))
-            )
-        }
-    )
-    ResponseEntity<CustomerDto> fetchAccount(@RequestParam
-                                             @Pattern(regexp = MOBILE_NUMBER_REGEX, message = "mobileNumber must be 12 digits")
-                                             String mobileNumber);
-
-    @Operation(
-        summary = "Fetch account endpoint",
-        description = "REST operation to fetch customer and account details based on a mobile number",
-        responses = {
-            @ApiResponse(
-                responseCode = "200",
-                description = "Account Deleted"
-            ),
-            @ApiResponse(
-                responseCode = "404",
-                description = "Account Not Found"
-            ),
-            @ApiResponse(
-                responseCode = "500",
-                description = "Internal Server Error",
-                content = @Content(
-                    schema = @Schema(implementation = ErrorResponseDto.class)
-                )
             )
         }
     )
