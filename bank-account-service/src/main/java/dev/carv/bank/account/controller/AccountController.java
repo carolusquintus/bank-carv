@@ -15,7 +15,7 @@ import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
 @Validated
 @RestController
 @RequiredArgsConstructor
-@RequestMapping(path = "/api/account", produces = { APPLICATION_JSON_VALUE})
+@RequestMapping(path = "/api/account", produces = APPLICATION_JSON_VALUE)
 public class AccountController implements AccountAPI {
 
     private final AccountService service;
