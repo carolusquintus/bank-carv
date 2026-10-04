@@ -4,7 +4,7 @@ import org.springframework.http.HttpStatus;
 
 import static org.springframework.http.HttpStatus.*;
 
-public enum ResponseMessage {
+public enum Message {
 
     SUCCESS(OK, "Request processed successfully"),
     RESOURCE_CREATED(CREATED, "%s created successfully"),
@@ -14,19 +14,19 @@ public enum ResponseMessage {
     INTERNAL_ERROR(INTERNAL_SERVER_ERROR, "Error occurred. Please contact support");
 
     private final HttpStatus status;
-    private final String message;
+    private final String text;
 
-    ResponseMessage(HttpStatus status, String message) {
+    Message(HttpStatus status, String text) {
         this.status = status;
-        this.message = message;
+        this.text = text;
     }
 
     public HttpStatus getStatus() {
         return status;
     }
 
-    public String getMessage() {
-        return message;
+    public String getText() {
+        return text;
     }
 
 }

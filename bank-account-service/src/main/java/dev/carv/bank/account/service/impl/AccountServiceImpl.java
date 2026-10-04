@@ -14,8 +14,8 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
 import static dev.carv.bank.account.constant.AccountType.SAVINGS;
-import static dev.carv.bank.commons.constant.ResponseMessage.RESOURCE_ALREADY_EXISTS;
-import static dev.carv.bank.commons.constant.ResponseMessage.RESOURCE_NOT_FOUND;
+import static dev.carv.bank.commons.constant.Message.RESOURCE_ALREADY_EXISTS;
+import static dev.carv.bank.commons.constant.Message.RESOURCE_NOT_FOUND;
 
 @Slf4j
 @Service
@@ -30,8 +30,8 @@ public class AccountServiceImpl implements AccountService {
     public void createAccount(CustomerDto dto) {
         var customer = customerMapper.toEntity(dto);
 
-        if (customerRepository.existsByMobileNumber(customer.getMobileNumber())) {
-            throw new ResourceAlreadyExistsException(RESOURCE_ALREADY_EXISTS.getMessage(), "Customer", "mobileNumber", customer.getMobileNumber());
+        if (customerRepository.existscustByMobileNumber(customer.getMobileNumber())) {
+            throw new ResourceAlreadyExistsException(RESOURCE_ALREADY_EXISTS, "Customer", "mobileNumber", customer.getMobileNumber());
         }
 
         var account = createAccount();
@@ -46,7 +46,7 @@ public class AccountServiceImpl implements AccountService {
     public CustomerDto fetchAccount(String mobileNumber) {
         return customerRepository.findByMobileNumberWithAccount(mobileNumber)
             .map(customerMapper::toDto)
-            .orElseThrow(() -> new ResourceNotFoundException(RESOURCE_NOT_FOUND.getMessage(), "Customer", "mobileNumber", mobileNumber));
+            .orElseThrow(() -> new ResourceNotFoundException(RESOURCE_NOT_FOUND.getText(), "Customer", "mobileNumber", mobileNumber));
     }
 
     @Override
@@ -55,7 +55,7 @@ public class AccountServiceImpl implements AccountService {
         var accountDto = customerDto.account();
         if (accountDto != null) {
             var accountFound = accountRepository.findByAccountNumber(accountDto.accountNumber())
-                .orElseThrow(() -> new ResourceNotFoundException(RESOURCE_NOT_FOUND.getMessage(), "Account", "accountNumber", accountDto.accountNumber().toString()));
+                .orElseThrow(() -> new ResourceNotFoundException(RESOURCE_NOT_FOUND.getText(), "Account", "accountNumber", accountDto.accountNumber().toString()));
 
             accountFound.setBranchAddress(accountDto.branchAddress());
             accountFound.setType(accountDto.type());
@@ -74,7 +74,7 @@ public class AccountServiceImpl implements AccountService {
     @Override
     public boolean deleteAccount(String mobileNumber) {
         var customer = customerRepository.findByMobileNumberWithAccount(mobileNumber)
-            .orElseThrow(() -> new ResourceNotFoundException(RESOURCE_NOT_FOUND.getMessage(), "Customer", "mobileNumber", mobileNumber));
+            .orElseThrow(() -> new ResourceNotFoundException(RESOURCE_NOT_FOUND.getText(), "Customer", "mobileNumber", mobileNumber));
         customerRepository.deleteById(customer.getId());
         return true;
     }

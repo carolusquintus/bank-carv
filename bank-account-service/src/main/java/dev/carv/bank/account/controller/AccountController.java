@@ -9,7 +9,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
-import static dev.carv.bank.commons.constant.ResponseMessage.*;
+import static dev.carv.bank.commons.constant.Message.*;
 import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
 
 @Validated
@@ -27,16 +27,16 @@ public class AccountController implements AccountAPI {
 
         return ResponseEntity
             .status(RESOURCE_CREATED.getStatus())
-            .body(new ResponseDto(RESOURCE_CREATED.getStatus().value(), RESOURCE_CREATED.getMessage().formatted("Account")));
+            .body(new ResponseDto(RESOURCE_CREATED.getStatus().value(), RESOURCE_CREATED.getText().formatted("Account")));
     }
 
     @PutMapping
     public ResponseEntity<ResponseDto> updateAccount(CustomerDto dto) {
         if (service.updateAccount(dto)) {
-            return ResponseEntity.ok(new ResponseDto(SUCCESS.getStatus().value(), SUCCESS.getMessage()));
+            return ResponseEntity.ok(new ResponseDto(SUCCESS.getStatus().value(), SUCCESS.getText()));
         }
         return ResponseEntity
-            .internalServerError().body(new ResponseDto(INTERNAL_ERROR.getStatus().value(), INTERNAL_ERROR.getMessage()));
+            .internalServerError().body(new ResponseDto(INTERNAL_ERROR.getStatus().value(), INTERNAL_ERROR.getText()));
     }
 
     @GetMapping
@@ -47,10 +47,10 @@ public class AccountController implements AccountAPI {
     @DeleteMapping
     public ResponseEntity<ResponseDto> deleteAccount(String mobileNumber) {
         if (service.deleteAccount(mobileNumber)) {
-            return ResponseEntity.ok(new ResponseDto(SUCCESS.getStatus().value(), SUCCESS.getMessage()));
+            return ResponseEntity.ok(new ResponseDto(SUCCESS.getStatus().value(), SUCCESS.getText()));
         }
         return ResponseEntity
-            .internalServerError().body(new ResponseDto(INTERNAL_ERROR.getStatus().value(), INTERNAL_ERROR.getMessage()));
+            .internalServerError().body(new ResponseDto(INTERNAL_ERROR.getStatus().value(), INTERNAL_ERROR.getText()));
 
     }
 
