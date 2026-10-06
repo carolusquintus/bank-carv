@@ -27,6 +27,7 @@ public class CardServiceImpl implements CardService {
             throw new ResourceAlreadyExistsException("Card", "mobileNumber", card.getMobileNumber());
         }
 
+        repository.save(card);
     }
 
     @Override

@@ -7,6 +7,7 @@ import dev.carv.bank.commons.dto.ResponseDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -20,7 +21,7 @@ public class CardController implements CardAPI {
 
     private final CardService service;
 
-    @Override
+    @PostMapping
     public ResponseEntity<ResponseDto> createCard(CardDto dto) {
         return null;
     }

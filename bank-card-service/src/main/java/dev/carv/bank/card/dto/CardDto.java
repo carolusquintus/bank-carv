@@ -2,10 +2,7 @@ package dev.carv.bank.card.dto;
 
 import dev.carv.bank.card.constant.CardType;
 import io.swagger.v3.oas.annotations.media.Schema;
-import jakarta.validation.constraints.NotEmpty;
-import jakarta.validation.constraints.Pattern;
-import jakarta.validation.constraints.Positive;
-import jakarta.validation.constraints.PositiveOrZero;
+import jakarta.validation.constraints.*;
 
 import java.math.BigDecimal;
 
@@ -22,13 +19,13 @@ public record CardDto (
     @Pattern(regexp = MOBILE_NUMBER_REGEX, message = "mobileNumber must be 12 digits")
     String mobileNumber,
 
-    @Schema(description = "Card number of the customer ", example = "525512345678")
+    @Schema(description = "Card number of the customer ", example = "1234567890123456")
     @NotEmpty(message = "cardNumber can not be null or empty")
-    @Pattern(regexp = CARD_NUMBER_REGEX, message = "cardNumber must be 12 digits")
+    @Pattern(regexp = CARD_NUMBER_REGEX, message = "cardNumber must be 16 digits")
     String cardNumber,
 
     @Schema(description = "Card type", example = "DEBIT")
-    @NotEmpty(message = "type can not be null or empty")
+    @NotNull(message = "type can not be null or empty")
     CardType type,
 
     @Positive(message = "limitAmount should be greater than zero")
