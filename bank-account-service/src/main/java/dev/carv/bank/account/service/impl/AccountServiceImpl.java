@@ -14,7 +14,6 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
 import static dev.carv.bank.account.constant.AccountType.SAVINGS;
-import static dev.carv.bank.commons.constant.Message.RESOURCE_ALREADY_EXISTS;
 import static dev.carv.bank.commons.constant.Message.RESOURCE_NOT_FOUND;
 
 @Slf4j
@@ -30,8 +29,8 @@ public class AccountServiceImpl implements AccountService {
     public void createAccount(CustomerDto dto) {
         var customer = customerMapper.toEntity(dto);
 
-        if (customerRepository.existscustByMobileNumber(customer.getMobileNumber())) {
-            throw new ResourceAlreadyExistsException(RESOURCE_ALREADY_EXISTS, "Customer", "mobileNumber", customer.getMobileNumber());
+        if (customerRepository.existsByMobileNumber(customer.getMobileNumber())) {
+            throw new ResourceAlreadyExistsException("Customer", "mobileNumber", customer.getMobileNumber());
         }
 
         var account = createAccount();

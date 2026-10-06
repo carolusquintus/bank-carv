@@ -24,7 +24,7 @@ public class CardServiceImpl implements CardService {
         var card = mapper.toEntity(dto);
 
         if (repository.existsByMobileNumber(card.getMobileNumber())) {
-            throw new ResourceAlreadyExistsException(RESOURCE_ALREADY_EXISTS.getText(), "Card", "mobileNumber", card.getMobileNumber());
+            throw new ResourceAlreadyExistsException("Card", "mobileNumber", card.getMobileNumber());
         }
 
     }
