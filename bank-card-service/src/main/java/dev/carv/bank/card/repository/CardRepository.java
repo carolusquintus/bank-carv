@@ -14,4 +14,6 @@ public interface CardRepository extends JpaRepository<CardEntity, UUID> {
 
     Optional<CardEntity> findByMobileNumber(String mobileNumber);
 
+    Optional<CardEntity> findByCardNumber(String cardNumber);
+
 }

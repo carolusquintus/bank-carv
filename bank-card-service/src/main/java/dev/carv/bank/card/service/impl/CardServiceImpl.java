@@ -1,16 +1,16 @@
 package dev.carv.bank.card.service.impl;
 
+import dev.carv.bank.card.constant.CardType;
 import dev.carv.bank.card.dto.CardDto;
 import dev.carv.bank.card.mapper.CardMapper;
 import dev.carv.bank.card.repository.CardRepository;
 import dev.carv.bank.card.service.CardService;
 import dev.carv.bank.commons.exception.ResourceAlreadyExistsException;
 import dev.carv.bank.commons.exception.ResourceNotFoundException;
+import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
-
-import static dev.carv.bank.commons.constant.Message.RESOURCE_ALREADY_EXISTS;
 
 @Slf4j
 @Service
@@ -40,8 +40,19 @@ public class CardServiceImpl implements CardService {
     }
 
     @Override
+    @Transactional
     public boolean updateCard(CardDto dto) {
-        return false;
+        var cardFound = repository.findByCardNumber(dto.cardNumber())
+            .orElseThrow(() -> new ResourceNotFoundException("Card", "cardNumber", dto.cardNumber()));
+
+        cardFound.setMobileNumber(dto.mobileNumber());
+        cardFound.setCardNumber(dto.cardNumber());
+        cardFound.setType(CardType.valueOf(dto.type()));
+        cardFound.setLimitAmount(dto.limitAmount());
+        cardFound.setAvailableAmount(dto.availableAmount());
+        cardFound.setUsedAmount(dto.usedAmount());
+
+        return true;
     }
 
     @Override

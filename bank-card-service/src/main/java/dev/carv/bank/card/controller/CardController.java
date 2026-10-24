@@ -5,16 +5,11 @@ import dev.carv.bank.card.dto.CardDto;
 import dev.carv.bank.card.service.CardService;
 import dev.carv.bank.commons.dto.ResponseDto;
 import lombok.RequiredArgsConstructor;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Repository;
 import org.springframework.validation.annotation.Validated;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
-import static dev.carv.bank.commons.constant.Message.RESOURCE_CREATED;
+import static dev.carv.bank.commons.constant.Message.*;
 import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
 
 @Validated
@@ -40,9 +35,13 @@ public class CardController implements CardAPI {
         return ResponseEntity.ok(service.fetchCard(mobileNumber));
     }
 
-    @Override
+    @PutMapping
     public ResponseEntity<ResponseDto> updateCard(CardDto dto) {
-        return null;
+        if (service.updateCard(dto)) {
+            return ResponseEntity.ok(new ResponseDto(SUCCESS.getStatus().value(), SUCCESS.getText()));
+        }
+        return ResponseEntity
+            .internalServerError().body(new ResponseDto(INTERNAL_ERROR.getStatus().value(), INTERNAL_ERROR.getText()));
     }
 
     @Override
