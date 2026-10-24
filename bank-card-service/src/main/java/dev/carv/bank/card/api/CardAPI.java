@@ -37,6 +37,31 @@ public interface CardAPI {
                                            CardDto dto);
 
     @Operation(
+        summary = "Fetch card endpoint",
+        description = "REST operation to fetch card details based on a mobile number",
+        responses = {
+            @ApiResponse(
+                responseCode = "200",
+                description = "Card OK"
+            ),
+            @ApiResponse(
+                responseCode = "404",
+                description = "Card Not Found"
+            ),
+            @ApiResponse(
+                responseCode = "500",
+                description = "Internal Server Error",
+                content = @Content(
+                    schema = @Schema(implementation = ErrorResponseDto.class)
+                )
+            )
+        }
+    )
+    ResponseEntity<CardDto> fetchCard(@RequestParam
+                                      @Pattern(regexp = MOBILE_NUMBER_REGEX, message = "mobileNumber must be 12 digits")
+                                      String mobileNumber);
+
+    @Operation(
         summary = "Update card endpoint",
         description = "REST operation to update card details based on a card number",
         responses = {
@@ -61,31 +86,6 @@ public interface CardAPI {
                                            @RequestBody
                                            CardDto dto);
 
-
-    @Operation(
-        summary = "Fetch card endpoint",
-        description = "REST operation to fetch card details based on a mobile number",
-        responses = {
-            @ApiResponse(
-                responseCode = "200",
-                description = "Card OK"
-            ),
-            @ApiResponse(
-                responseCode = "404",
-                description = "Card Not Found"
-            ),
-            @ApiResponse(
-                responseCode = "500",
-                description = "Internal Server Error",
-                content = @Content(
-                    schema = @Schema(implementation = ErrorResponseDto.class)
-                )
-            )
-        }
-    )
-    ResponseEntity<CardDto> fetchCard(@RequestParam
-                                      @Pattern(regexp = MOBILE_NUMBER_REGEX, message = "mobileNumber must be 12 digits")
-                                      String mobileNumber);
 
     @Operation(
         summary = "Delete card endpoint",
