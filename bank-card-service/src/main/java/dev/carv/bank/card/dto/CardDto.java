@@ -1,6 +1,7 @@
 package dev.carv.bank.card.dto;
 
 import dev.carv.bank.card.constant.CardType;
+import dev.carv.bank.commons.annotation.ValueEnum;
 import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.validation.constraints.*;
 
@@ -26,7 +27,8 @@ public record CardDto (
 
     @Schema(description = "Card type", example = "DEBIT")
     @NotNull(message = "type can not be null or empty")
-    CardType type,
+    @ValueEnum(clazz = CardType.class)
+    String type,
 
     @Positive(message = "limitAmount should be greater than zero")
     @Schema(description = "Limit amount available against a card", example = "100000")
