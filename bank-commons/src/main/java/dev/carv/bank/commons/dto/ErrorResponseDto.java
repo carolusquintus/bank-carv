@@ -1,7 +1,7 @@
 package dev.carv.bank.commons.dto;
 
 import io.swagger.v3.oas.annotations.media.Schema;
-import org.springframework.http.HttpStatus;
+import org.springframework.http.HttpStatusCode;
 
 import java.time.LocalDateTime;
 
@@ -13,8 +13,8 @@ public record ErrorResponseDto(
     @Schema(description = "Request path that caused the error", example = "/api/v1/customers")
     String path,
 
-    @Schema(description = "HTTP status code", example = "400")
-    HttpStatus status,
+    @Schema(description = "HTTP status", example = "201")
+    HttpStatusCode status,
 
     @Schema(description = "Error object or message", example = "Validation failed for object='customerDto'. Error count: 1")
     Object error,

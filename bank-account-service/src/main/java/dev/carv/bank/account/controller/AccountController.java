@@ -27,7 +27,7 @@ public class AccountController implements AccountAPI {
 
         return ResponseEntity
             .status(RESOURCE_CREATED.getStatus())
-            .body(new ResponseDto(RESOURCE_CREATED.getStatus().value(), RESOURCE_CREATED.format("Account")));
+            .body(new ResponseDto(RESOURCE_CREATED.getStatus(), RESOURCE_CREATED.format("Account")));
     }
 
     @GetMapping
@@ -38,19 +38,19 @@ public class AccountController implements AccountAPI {
     @PutMapping
     public ResponseEntity<ResponseDto> updateAccount(CustomerDto dto) {
         if (service.updateAccount(dto)) {
-            return ResponseEntity.ok(new ResponseDto(SUCCESS.getStatus().value(), SUCCESS.getText()));
+            return ResponseEntity.ok(new ResponseDto(SUCCESS.getStatus(), SUCCESS.getText()));
         }
         return ResponseEntity
-            .internalServerError().body(new ResponseDto(INTERNAL_ERROR.getStatus().value(), INTERNAL_ERROR.getText()));
+            .internalServerError().body(new ResponseDto(INTERNAL_ERROR.getStatus(), INTERNAL_ERROR.getText()));
     }
 
     @DeleteMapping
     public ResponseEntity<ResponseDto> deleteAccount(String mobileNumber) {
         if (service.deleteAccount(mobileNumber)) {
-            return ResponseEntity.ok(new ResponseDto(SUCCESS.getStatus().value(), SUCCESS.getText()));
+            return ResponseEntity.ok(new ResponseDto(SUCCESS.getStatus(), SUCCESS.getText()));
         }
         return ResponseEntity
-            .internalServerError().body(new ResponseDto(INTERNAL_ERROR.getStatus().value(), INTERNAL_ERROR.getText()));
+            .internalServerError().body(new ResponseDto(INTERNAL_ERROR.getStatus(), INTERNAL_ERROR.getText()));
 
     }
 
