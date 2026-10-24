@@ -30,14 +30,17 @@ public record CardDto (
     @ValueEnum(clazz = CardType.class)
     String type,
 
+    @NotNull(message = "limitAmount can not be null")
     @Positive(message = "limitAmount should be greater than zero")
     @Schema(description = "Limit amount available against a card", example = "100000")
     BigDecimal limitAmount,
 
+    @NotNull(message = "usedAmount can not be null")
     @PositiveOrZero(message = "usedAmount should be equal or greater than zero")
     @Schema(description = "Limit amount available against a card", example = "1000")
     BigDecimal usedAmount,
 
+    @NotNull(message = "availableAmount can not be null")
     @PositiveOrZero(message = "availableAmount should be equal or greater than zero")
     @Schema(description = "Amount available against a card", example = "90000")
     BigDecimal availableAmount
