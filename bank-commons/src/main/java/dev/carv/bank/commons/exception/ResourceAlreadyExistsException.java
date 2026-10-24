@@ -10,7 +10,7 @@ import static org.springframework.http.HttpStatus.BAD_REQUEST;
 public class ResourceAlreadyExistsException extends RuntimeException {
 
     public ResourceAlreadyExistsException(Message message, String... params) {
-        super(message.getText().formatted(params));
+        super(message.format(params));
     }
 
     public ResourceAlreadyExistsException(String... params) {

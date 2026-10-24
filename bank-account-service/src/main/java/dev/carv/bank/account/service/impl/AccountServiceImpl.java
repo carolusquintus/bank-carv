@@ -45,7 +45,7 @@ public class AccountServiceImpl implements AccountService {
     public CustomerDto fetchAccount(String mobileNumber) {
         return customerRepository.findByMobileNumberWithAccount(mobileNumber)
             .map(customerMapper::toDto)
-            .orElseThrow(() -> new ResourceNotFoundException(RESOURCE_NOT_FOUND.getText(), "Customer", "mobileNumber", mobileNumber));
+            .orElseThrow(() -> new ResourceNotFoundException("Customer", "mobileNumber", mobileNumber));
     }
 
     @Override

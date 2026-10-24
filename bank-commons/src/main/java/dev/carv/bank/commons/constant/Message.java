@@ -29,4 +29,8 @@ public enum Message {
         return text;
     }
 
+    public String format(Object... params) {
+        return params.length > 0 ? text.formatted(params) : text;
+    }
+
 }
