@@ -73,7 +73,7 @@ public class AccountServiceImpl implements AccountService {
     @Override
     public boolean deleteAccount(String mobileNumber) {
         var customer = customerRepository.findByMobileNumberWithAccount(mobileNumber)
-            .orElseThrow(() -> new ResourceNotFoundException(RESOURCE_NOT_FOUND.getText(), "Customer", "mobileNumber", mobileNumber));
+            .orElseThrow(() -> new ResourceNotFoundException("Customer", "mobileNumber", mobileNumber));
         customerRepository.deleteById(customer.getId());
         return true;
     }
