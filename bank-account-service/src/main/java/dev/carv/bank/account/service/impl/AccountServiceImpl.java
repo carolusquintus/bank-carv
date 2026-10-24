@@ -54,7 +54,7 @@ public class AccountServiceImpl implements AccountService {
         var accountDto = customerDto.account();
         if (accountDto != null) {
             var accountFound = accountRepository.findByAccountNumber(accountDto.accountNumber())
-                .orElseThrow(() -> new ResourceNotFoundException(RESOURCE_NOT_FOUND.getText(), "Account", "accountNumber", accountDto.accountNumber().toString()));
+                .orElseThrow(() -> new ResourceNotFoundException("Account", "accountNumber", accountDto.accountNumber().toString()));
 
             accountFound.setBranchAddress(accountDto.branchAddress());
             accountFound.setType(accountDto.type());
