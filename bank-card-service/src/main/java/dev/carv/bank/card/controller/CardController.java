@@ -44,9 +44,13 @@ public class CardController implements CardAPI {
             .internalServerError().body(new ResponseDto(INTERNAL_ERROR.getStatus(), INTERNAL_ERROR.getText()));
     }
 
-    @Override
+    @DeleteMapping
     public ResponseEntity<ResponseDto> deleteCard(String mobileNumber) {
-        return null;
+        if (service.deleteCard(mobileNumber)) {
+            return ResponseEntity.ok(new ResponseDto(SUCCESS.getStatus(), SUCCESS.getText()));
+        }
+        return ResponseEntity
+            .internalServerError().body(new ResponseDto(INTERNAL_ERROR.getStatus(), INTERNAL_ERROR.getText()));
     }
 
 }

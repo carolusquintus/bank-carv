@@ -51,7 +51,6 @@ public class AccountController implements AccountAPI {
         }
         return ResponseEntity
             .internalServerError().body(new ResponseDto(INTERNAL_ERROR.getStatus(), INTERNAL_ERROR.getText()));
-
     }
 
 }

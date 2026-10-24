@@ -57,7 +57,10 @@ public class CardServiceImpl implements CardService {
 
     @Override
     public boolean deleteCard(String mobileNumber) {
-        return false;
+        var customer = repository.findByMobileNumber(mobileNumber)
+            .orElseThrow(() -> new ResourceNotFoundException("Card", "mobileNumber", mobileNumber));
+        repository.deleteById(customer.getId());
+        return true;
     }
 
 }
