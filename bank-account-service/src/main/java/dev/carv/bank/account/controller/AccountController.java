@@ -27,7 +27,12 @@ public class AccountController implements AccountAPI {
 
         return ResponseEntity
             .status(RESOURCE_CREATED.getStatus())
-            .body(new ResponseDto(RESOURCE_CREATED.getStatus().value(), RESOURCE_CREATED.getText().formatted("Account")));
+            .body(new ResponseDto(RESOURCE_CREATED.getStatus().value(), RESOURCE_CREATED.format("Account")));
+    }
+
+    @GetMapping
+    public ResponseEntity<CustomerDto> fetchAccount(String mobileNumber) {
+        return ResponseEntity.ok(service.fetchAccount(mobileNumber));
     }
 
     @PutMapping
@@ -37,11 +42,6 @@ public class AccountController implements AccountAPI {
         }
         return ResponseEntity
             .internalServerError().body(new ResponseDto(INTERNAL_ERROR.getStatus().value(), INTERNAL_ERROR.getText()));
-    }
-
-    @GetMapping
-    public ResponseEntity<CustomerDto> fetchAccount(String mobileNumber) {
-        return ResponseEntity.ok(service.fetchAccount(mobileNumber));
     }
 
     @DeleteMapping

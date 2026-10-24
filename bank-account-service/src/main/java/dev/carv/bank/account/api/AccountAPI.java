@@ -37,31 +37,6 @@ public interface AccountAPI {
                                               CustomerDto dto);
 
     @Operation(
-        summary = "Update account endpoint",
-        description = "REST operation to update customer and account details based on a account number",
-        responses = {
-            @ApiResponse(
-                responseCode = "200",
-                description = "Account Updated"
-            ),
-            @ApiResponse(
-                responseCode = "404",
-                description = "Account Not Found"
-            ),
-            @ApiResponse(
-                responseCode = "500",
-                description = "Internal Server Error",
-                content = @Content(
-                    schema = @Schema(implementation = ErrorResponseDto.class)
-                )
-            )
-        }
-    )
-    ResponseEntity<ResponseDto> updateAccount(@Valid
-                                              @RequestBody
-                                              CustomerDto dto);
-
-    @Operation(
         summary = "Fetch account endpoint",
         description = "REST operation to fetch customer and account details based on a mobile number",
         responses = {
@@ -85,6 +60,31 @@ public interface AccountAPI {
     ResponseEntity<CustomerDto> fetchAccount(@RequestParam
                                              @Pattern(regexp = MOBILE_NUMBER_REGEX, message = "mobileNumber must be 12 digits")
                                              String mobileNumber);
+
+    @Operation(
+        summary = "Update account endpoint",
+        description = "REST operation to update customer and account details based on a account number",
+        responses = {
+            @ApiResponse(
+                responseCode = "200",
+                description = "Account Updated"
+            ),
+            @ApiResponse(
+                responseCode = "404",
+                description = "Account Not Found"
+            ),
+            @ApiResponse(
+                responseCode = "500",
+                description = "Internal Server Error",
+                content = @Content(
+                    schema = @Schema(implementation = ErrorResponseDto.class)
+                )
+            )
+        }
+    )
+    ResponseEntity<ResponseDto> updateAccount(@Valid
+                                              @RequestBody
+                                              CustomerDto dto);
 
     @Operation(
         summary = "Delete account endpoint",
