@@ -7,7 +7,7 @@ spring:
   application:
     name: bank-card-service
   datasource:
-    url: jdbc:sqlserver://localhost:1445;database=bank-card-db;encrypt=true;trustServerCertificate=true;
+    url: jdbc:sqlserver://localhost:1444;database=bank-card-service;encrypt=true;trustServerCertificate=true;
     driver-class-name: com.microsoft.sqlserver.jdbc.SQLServerDriver
     username: sa
     password:

@@ -1,7 +1,8 @@
 name: bank-carv
+
 services:
-  bank-account-db:
-    container_name: bank-account-db
+  bank-carv-db:
+    container_name: bank-carv-db
     image: mcr.microsoft.com/mssql/server:2025-latest
     environment:
       ACCEPT_EULA: Y
@@ -10,51 +11,17 @@ services:
     ports:
       - "1444:1433"
     volumes:
-      - bank-account-db-data:/var/opt/mssql
+      - bank-carv-db-data:/var/opt/mssql
     restart: always
     networks:
-      - bank-network
+      - bank-carv-network
     cap_add:
       - NET_ADMIN
 
-  bank-card-db:
-    container_name: bank-card-db
-    image: mcr.microsoft.com/mssql/server:2025-latest
-    environment:
-      ACCEPT_EULA: Y
-      MSSQL_SA_PASSWORD:
-      MSSQL_PID: Developer
-    ports:
-      - "1445:1433"
-    volumes:
-      - bank-card-db-data:/var/opt/mssql
-    restart: always
-    networks:
-      - bank-network
-
-  bank-loan-db:
-    container_name: bank-loan-db
-    image: mcr.microsoft.com/mssql/server:2025-latest
-    environment:
-      ACCEPT_EULA: Y
-      MSSQL_SA_PASSWORD:
-      MSSQL_PID: Developer
-    ports:
-      - "1446:1433"
-    volumes:
-      - bank-loan-db-data:/var/opt/mssql
-    restart: always
-    networks:
-      - bank-network
+volumes:
+  bank-carv-db-data:
+    name: bank-carv-db-data
 
 networks:
-  bank-network:
-    name: bank-network
-
-volumes:
-  bank-account-db-data:
-    name: bank-account-db-data
-  bank-card-db-data:
-    name: bank-card-db-data
-  bank-loan-db-data:
-    name: bank-loan-db-data
+  bank-carv-network:
+    name: bank-carv-network
