@@ -32,6 +32,21 @@ services:
     networks:
       - bank-network
 
+  bank-loan-db:
+    container_name: bank-loan-db
+    image: mcr.microsoft.com/mssql/server:2025-latest
+    environment:
+      ACCEPT_EULA: Y
+      MSSQL_SA_PASSWORD:
+      MSSQL_PID: Developer
+    ports:
+      - "1445:1433"
+    volumes:
+      - bank-loan-db-data:/var/opt/mssql
+    restart: always
+    networks:
+      - bank-network
+
 networks:
   bank-network:
     name: bank-network
@@ -41,4 +56,5 @@ volumes:
     name: bank-account-db-data
   bank-card-db-data:
     name: bank-card-db-data
-
+  bank-load-db-data:
+    name: bank-loan-db-data
