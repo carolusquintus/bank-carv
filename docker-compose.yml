@@ -40,7 +40,7 @@ services:
       MSSQL_SA_PASSWORD:
       MSSQL_PID: Developer
     ports:
-      - "1445:1433"
+      - "1446:1433"
     volumes:
       - bank-loan-db-data:/var/opt/mssql
     restart: always
@@ -56,5 +56,5 @@ volumes:
     name: bank-account-db-data
   bank-card-db-data:
     name: bank-card-db-data
-  bank-load-db-data:
+  bank-loan-db-data:
     name: bank-loan-db-data
