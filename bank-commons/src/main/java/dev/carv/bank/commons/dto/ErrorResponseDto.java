@@ -13,7 +13,7 @@ public record ErrorResponseDto(
     @Schema(description = "Request path that caused the error", example = "/api/v1/customers")
     String path,
 
-    @Schema(description = "HTTP status", example = "201")
+    @Schema(description = "HTTP status", example = "STATUS")
     HttpStatusCode status,
 
     @Schema(description = "Error object or message", example = "Validation failed for object='customerDto'. Error count: 1")

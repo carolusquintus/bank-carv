@@ -8,10 +8,10 @@ import org.springframework.http.HttpStatusCode;
     description = "Schema to hold successful response information")
 public record ResponseDto(
 
-    @Schema(description = "Response status", example = "201")
+    @Schema(description = "Response status")
     HttpStatusCode status,
 
-    @Schema(description = "Response message", example = "Resource created")
+    @Schema(description = "Response message", example = "Response message")
     String message
 
 ) {
