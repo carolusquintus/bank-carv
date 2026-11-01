@@ -1,0 +1,19 @@
+--liquibase formatted sql
+--changeset carolusquintus:0001
+
+CREATE TABLE dbo.CARD (
+    ID                  UNIQUEIDENTIFIER    NOT NULL,
+    MOBILE_NUMBER       VARCHAR(20)         NOT NULL,
+    LOAN_NUMBER         VARCHAR(20)         NOT NULL,
+    TYPE                VARCHAR(100)        NOT NULL,
+    TOTAL_LOAN          DECIMAL(13,2)       NOT NULL,
+    PAID_LOAN           DECIMAL(13,2)       NOT NULL,
+    OUTSTANDING_LOAN    DECIMAL(13,2)       NOT NULL,
+    CREATED_AT          DATETIME2           NOT NULL,
+    UPDATED_AT          DATETIME2           DEFAULT NULL,
+    CREATED_BY          VARCHAR(20)         NOT NULL,
+    UPDATED_BY          VARCHAR(20)         DEFAULT NULL,
+    CONSTRAINT PK_CARD PRIMARY KEY (ID)
+);
+
+--rollback DROP TABLE dbo.CARD;
