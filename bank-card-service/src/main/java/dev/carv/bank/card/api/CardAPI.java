@@ -32,9 +32,9 @@ public interface CardAPI {
             )
         }
     )
-    ResponseEntity<ResponseDto> createCard(@Valid
-                                           @RequestBody
-                                           CardDto dto);
+    ResponseEntity<ResponseDto> createCard(@RequestParam
+                                           @Pattern(regexp = MOBILE_NUMBER_REGEX, message = "mobileNumber must be 12 digits")
+                                           String mobileNumber);
 
     @Operation(
         summary = "Fetch card endpoint",
