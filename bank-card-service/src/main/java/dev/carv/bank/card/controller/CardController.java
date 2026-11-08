@@ -21,9 +21,9 @@ public class CardController implements CardAPI {
     private final CardService service;
 
     @PostMapping
-    public ResponseEntity<ResponseDto> createCard(CardDto dto) {
+    public ResponseEntity<ResponseDto> createCard(String mobileNumber) {
 
-        service.createCard(dto);
+        service.createCard(mobileNumber);
 
         return ResponseEntity
             .status(RESOURCE_CREATED.getStatus())

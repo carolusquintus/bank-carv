@@ -4,7 +4,7 @@ import dev.carv.bank.card.dto.CardDto;
 
 public interface CardService {
 
-    void createCard(CardDto dto);
+    void createCard(String mobileNumber);
 
     CardDto fetchCard(String mobileNumber);
 

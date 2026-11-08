@@ -1,5 +1,6 @@
 package dev.carv.bank.card.dto;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import dev.carv.bank.card.constant.CardType;
 import dev.carv.bank.commons.annotation.ValueEnum;
 import io.swagger.v3.oas.annotations.media.Schema;
@@ -7,6 +8,7 @@ import jakarta.validation.constraints.*;
 
 import java.math.BigDecimal;
 
+import static com.fasterxml.jackson.annotation.JsonFormat.Shape.NUMBER;
 import static dev.carv.bank.commons.constant.ValidationConstants.CARD_NUMBER_REGEX;
 import static dev.carv.bank.commons.constant.ValidationConstants.MOBILE_NUMBER_REGEX;
 
@@ -30,19 +32,22 @@ public record CardDto (
     @ValueEnum(clazz = CardType.class)
     String type,
 
-    @NotNull(message = "limitAmount can not be null")
+    @Digits(integer = 8, fraction = 2, message = "limitAmount must have at most 8 digits and at most 2 decimal places")
     @Positive(message = "limitAmount should be greater than zero")
     @Schema(description = "Limit amount available against a card", example = "100000")
+    @JsonFormat(shape = NUMBER, pattern = "0.00")
     BigDecimal limitAmount,
 
-    @NotNull(message = "usedAmount can not be null")
+    @Digits(integer = 8, fraction = 2, message = "usedAmount must have at most 8 digits and at most 2 decimal places")
     @PositiveOrZero(message = "usedAmount should be equal or greater than zero")
     @Schema(description = "Limit amount available against a card", example = "1000")
+    @JsonFormat(shape = NUMBER, pattern = "0.00")
     BigDecimal usedAmount,
 
-    @NotNull(message = "availableAmount can not be null")
+    @Digits(integer = 8, fraction = 2, message = "availableAmount must have at most 8 digits and at most 2 decimal places")
     @PositiveOrZero(message = "availableAmount should be equal or greater than zero")
     @Schema(description = "Amount available against a card", example = "90000")
+    @JsonFormat(shape = NUMBER, pattern = "0.00")
     BigDecimal availableAmount
 
 ) {}
