@@ -22,7 +22,6 @@ public class CardServiceImpl implements CardService {
 
     private final CardMapper mapper;
     private final CardRepository repository;
-    private final CardMapper cardMapper;
 
     @Override
     public void createCard(String mobileNumber) {
@@ -36,7 +35,7 @@ public class CardServiceImpl implements CardService {
     @Override
     public CardDto fetchCard(String mobileNumber) {
         return repository.findByMobileNumber(mobileNumber)
-            .map(cardMapper::toDto)
+            .map(mapper::toDto)
             .orElseThrow(() -> new ResourceNotFoundException("Card", "mobileNumber", mobileNumber));
     }
 
