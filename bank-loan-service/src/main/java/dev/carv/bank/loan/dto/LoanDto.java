@@ -7,6 +7,7 @@ import jakarta.validation.constraints.*;
 
 import java.math.BigDecimal;
 
+import static dev.carv.bank.commons.constant.ValidationConstants.LOAN_NUMBER_REGEX;
 import static dev.carv.bank.commons.constant.ValidationConstants.MOBILE_NUMBER_REGEX;
 
 @Schema(
@@ -18,25 +19,32 @@ public record LoanDto(
     @NotEmpty(message = "mobileNumber can not be null or empty")
     @Pattern(regexp = MOBILE_NUMBER_REGEX, message = "mobileNumber must be 12 digits")
     String mobileNumber,
+
+    @Schema(description = "Loan number of the customer", example = "75255123456758")
+    @NotEmpty(message = "loanNumber can not be null or empty")
+    @Pattern(regexp = LOAN_NUMBER_REGEX, message = "loanNumber must be 14 digits")
     String loanNumber,
 
-    @Schema(description = "Card type", example = "DEBIT")
+    @Schema(description = "Loan type", example = "HOME")
     @NotNull(message = "type can not be null or empty")
     @ValueEnum(clazz = LoanType.class)
     String type,
 
+    @Digits(integer = 8, fraction = 2, message = "totalLoan must have at most 8 digits and at most 2 decimal places")
     @NotNull(message = "totalLoan can not be null")
     @Positive(message = "totalLoan should be greater than zero")
     @Schema(description = "Total loan amount", example = "100000")
     BigDecimal totalLoan,
 
+    @Digits(integer = 8, fraction = 2, message = "paidLoan must have at most 8 digits and at most 2 decimal places")
     @NotNull(message = "paidLoan can not be null")
     @PositiveOrZero(message = "paidLoan should be equal or greater than zero")
     @Schema(description = "Paid loan amount", example = "1000")
     BigDecimal paidLoan,
 
+    @Digits(integer = 8, fraction = 2, message = "outstandingLoan must have at most 8 digits and at most 2 decimal places")
     @NotNull(message = "outstandingLoan can not be null")
-    @PositiveOrZero(message = "outstaindingLoan should be equal or greater than zero")
+    @PositiveOrZero(message = "outstandingLoan should be equal or greater than zero")
     @Schema(description = "Outstanding amount against a loan", example = "90000")
     BigDecimal outstandingLoan
 

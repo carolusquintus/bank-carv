@@ -1,7 +1,7 @@
 --liquibase formatted sql
 --changeset carolusquintus:0001
 
-CREATE TABLE dbo.CARD (
+CREATE TABLE dbo.LOAN(
     ID                  UNIQUEIDENTIFIER    NOT NULL,
     MOBILE_NUMBER       VARCHAR(20)         NOT NULL,
     LOAN_NUMBER         VARCHAR(20)         NOT NULL,
@@ -16,4 +16,4 @@ CREATE TABLE dbo.CARD (
     CONSTRAINT PK_CARD PRIMARY KEY (ID)
 );
 
---rollback DROP TABLE dbo.CARD;
+--rollback DROP TABLE dbo.LOAN;

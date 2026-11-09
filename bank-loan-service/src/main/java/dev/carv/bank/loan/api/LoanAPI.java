@@ -24,7 +24,7 @@ public interface LoanAPI {
 
     @Operation(
         summary = "Create loan endpoint",
-        description = "REST operation to create a loan card inside Bank CARV",
+        description = "REST operation to create a loan inside Bank CARV",
         responses = {
             @ApiResponse(
                 responseCode = "201",
@@ -32,9 +32,9 @@ public interface LoanAPI {
             )
         }
     )
-    ResponseEntity<ResponseDto> createLoan(@Valid
-                                           @RequestBody
-                                           LoanDto dto);
+    ResponseEntity<ResponseDto> createLoan(@RequestParam
+                                           @Pattern(regexp = MOBILE_NUMBER_REGEX, message = "mobileNumber must be 12 digits")
+                                           String mobileNumber);
 
     @Operation(
         summary = "Fetch loan endpoint",
@@ -62,16 +62,16 @@ public interface LoanAPI {
                                       String mobileNumber);
 
     @Operation(
-        summary = "Update card endpoint",
-        description = "REST operation to update card details based on a card number",
+        summary = "Update loan endpoint",
+        description = "REST operation to update loan details based on a loan number",
         responses = {
             @ApiResponse(
                 responseCode = "200",
-                description = "Card Updated"
+                description = "Loan Updated"
             ),
             @ApiResponse(
                 responseCode = "404",
-                description = "Card Not Found"
+                description = "Loan Not Found"
             ),
             @ApiResponse(
                 responseCode = "500",
@@ -82,24 +82,24 @@ public interface LoanAPI {
             )
         }
     )
-    ResponseEntity<ResponseDto> updateCard(@Valid
+    ResponseEntity<ResponseDto> updateLoan(@Valid
                                            @RequestBody
-                                           CardDto dto);
+                                           LoanDto dto);
 
 
     @Operation(
-        summary = "Delete card endpoint",
-        description = "REST operation to delete card details based on a mobile number",
+        summary = "Delete loan endpoint",
+        description = "REST operation to delete loan details based on a mobile number",
         responses = {
             @ApiResponse(
                 responseCode = "200",
-                description = "Card Deleted"
+                description = "Loan Deleted"
             ),
             @ApiResponse(
                 responseCode = "404",
-                description = "Card Not Found"
+                description = "Loan Not Found"
             ),
-            @ApiResponse(
+        @ApiResponse(
                 responseCode = "500",
                 description = "Internal Server Error",
                 content = @Content(
@@ -107,7 +107,7 @@ public interface LoanAPI {
             )
         }
     )
-    ResponseEntity<ResponseDto> deleteCard(@RequestParam
+    ResponseEntity<ResponseDto> deleteLoan(@RequestParam
                                            @Pattern(regexp = MOBILE_NUMBER_REGEX, message = "mobileNumber must be 12 digits")
                                            String mobileNumber);
 }

@@ -1,4 +1,4 @@
-package mapper;
+package dev.carv.bank.loan.mapper;
 
 import dev.carv.bank.loan.dto.LoanDto;
 import dev.carv.bank.loan.entity.LoanEntity;
