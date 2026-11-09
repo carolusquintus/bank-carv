@@ -28,7 +28,6 @@ public class CardServiceImpl implements CardService {
         if (repository.existsByMobileNumber(mobileNumber)) {
             throw new ResourceAlreadyExistsException("Card", "mobileNumber", mobileNumber);
         }
-
         repository.save(createNewCard(mobileNumber));
     }
 
@@ -57,9 +56,9 @@ public class CardServiceImpl implements CardService {
 
     @Override
     public boolean deleteCard(String mobileNumber) {
-        var customer = repository.findByMobileNumber(mobileNumber)
+        var card = repository.findByMobileNumber(mobileNumber)
             .orElseThrow(() -> new ResourceNotFoundException("Card", "mobileNumber", mobileNumber));
-        repository.deleteById(customer.getId());
+        repository.deleteById(card.getId());
         return true;
     }
 
