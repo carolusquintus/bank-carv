@@ -66,10 +66,7 @@ class AccountServiceImplSpec extends Specification {
         service.createAccount(dto)
 
         then:
-        1 * customerRepository.save({ CustomerEntity it ->
-            savedCustomer = it
-            true
-        })
+        1 * customerRepository.save(_) >> { CustomerEntity it -> savedCustomer = it }
         savedCustomer != null
         savedCustomer.account != null
         savedCustomer.account.type == AccountType.SAVINGS
@@ -99,16 +96,14 @@ class AccountServiceImplSpec extends Specification {
         given:
         def customerEntity = createCustomerEntity()
         def expectedDto = createCustomerDto()
-        customerRepository.findByMobileNumberWithAccount(MOBILE_NUMBER) >> Optional.of(customerEntity)
-        customerMapper.toDto(customerEntity) >> expectedDto
 
         when:
         def actualDto = service.fetchAccount(MOBILE_NUMBER)
 
         then:
+        1 * customerRepository.findByMobileNumberWithAccount(MOBILE_NUMBER) >> Optional.of(customerEntity)
+        1 * customerMapper.toDto(customerEntity) >> expectedDto
         actualDto == expectedDto
-        1 * customerRepository.findByMobileNumberWithAccount(MOBILE_NUMBER)
-        1 * customerMapper.toDto(customerEntity)
     }
 
     def "fetchAccount should throw ResourceNotFoundException when customer is not found"() {
@@ -194,15 +189,14 @@ class AccountServiceImplSpec extends Specification {
     def "deleteAccount should delete customer by id and return true when found"() {
         given:
         def customerEntity = createCustomerEntity()
-        customerRepository.findByMobileNumberWithAccount(MOBILE_NUMBER) >> Optional.of(customerEntity)
 
         when:
         def deleted = service.deleteAccount(MOBILE_NUMBER)
 
         then:
-        deleted == true
-        1 * customerRepository.findByMobileNumberWithAccount(MOBILE_NUMBER)
+        1 * customerRepository.findByMobileNumberWithAccount(MOBILE_NUMBER) >> Optional.of(customerEntity)
         1 * customerRepository.deleteById(customerEntity.id)
+        deleted == true
     }
 
     def "deleteAccount should throw ResourceNotFoundException when customer not found"() {

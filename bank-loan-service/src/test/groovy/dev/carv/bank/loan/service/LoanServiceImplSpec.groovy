@@ -28,7 +28,7 @@ class LoanServiceImplSpec extends Specification {
         service.createLoan(MOBILE_NUMBER)
 
         then:
-        1 * repository.save({ LoanEntity it -> capturedLoan = it; true })
+        1 * repository.save(_) >> { LoanEntity it -> capturedLoan = it }
         capturedLoan != null
         capturedLoan.getMobileNumber() == MOBILE_NUMBER
         capturedLoan.getLoanNumber() != null

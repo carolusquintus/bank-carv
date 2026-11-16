@@ -28,7 +28,7 @@ class CardServiceImplSpec extends Specification {
         service.createCard(MOBILE_NUMBER)
 
         then:
-        1 * repository.save({ CardEntity it -> capturedCard = it; true })
+        1 * repository.save(_) >> { CardEntity it -> capturedCard = it }
         capturedCard != null
         capturedCard.getMobileNumber() == MOBILE_NUMBER
         capturedCard.getCardNumber().size() == 16

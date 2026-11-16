@@ -29,21 +29,22 @@ class LoanControllerSpec extends Specification {
     }
 
     def "createLoan should return 201 Created with ResponseDto"() {
-        given:
-        1 * service.createLoan(MOBILE_NUMBER)
-
         when:
         def response = controller.createLoan(MOBILE_NUMBER)
 
         then:
+        1 * service.createLoan(MOBILE_NUMBER)
         response.statusCode == HttpStatus.CREATED
         response.body != null
         response.body.status() == HttpStatus.CREATED
         response.body.message() == Message.RESOURCE_CREATED.format("Loan")
 
-        and:
-        mockMvc.perform(post("/api/loan").param("mobileNumber", MOBILE_NUMBER))
-            .andExpect(status().isCreated())
+        when: "the same request goes through the real MVC pipeline"
+        def result = mockMvc.perform(post("/api/loan").param("mobileNumber", MOBILE_NUMBER))
+
+        then:
+        1 * service.createLoan(MOBILE_NUMBER)
+        result.andExpect(status().isCreated())
             .andExpect(jsonPath('$.status').value("CREATED"))
             .andExpect(jsonPath('$.message').value(Message.RESOURCE_CREATED.format("Loan")))
     }
