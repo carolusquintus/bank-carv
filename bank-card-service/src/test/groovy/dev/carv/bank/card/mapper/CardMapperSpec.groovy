@@ -67,4 +67,10 @@ class CardMapperSpec extends Specification {
         expect:
         mapper.toEntity(null) == null
     }
+
+    def "a missing type maps to null in both directions"() {
+        expect:
+        mapper.toDto(new CardEntity(mobileNumber: "525512345678")).type() == null
+        mapper.toEntity(new CardDto("525512345678", "1234567890123456", null, null, null, null)).type == null
+    }
 }

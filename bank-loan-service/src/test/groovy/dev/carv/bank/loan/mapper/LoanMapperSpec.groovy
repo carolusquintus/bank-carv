@@ -67,4 +67,10 @@ class LoanMapperSpec extends Specification {
         expect:
         mapper.toEntity(null) == null
     }
+
+    def "a missing type maps to null in both directions"() {
+        expect:
+        mapper.toDto(new LoanEntity(mobileNumber: "525512345678")).type() == null
+        mapper.toEntity(new LoanDto("525512345678", "12345678901234", null, null, null, null)).type == null
+    }
 }
