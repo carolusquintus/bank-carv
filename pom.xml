@@ -61,6 +61,16 @@
     </dependencyManagement>
 
     <build>
+        <pluginManagement>
+            <plugins>
+                <!-- Importing the Boot BOM only manages dependencies, not plugins. Pin it here. -->
+                <plugin>
+                    <groupId>org.springframework.boot</groupId>
+                    <artifactId>spring-boot-maven-plugin</artifactId>
+                    <version>${spring-boot.version}</version>
+                </plugin>
+            </plugins>
+        </pluginManagement>
         <plugins>
             <!-- Surefire ignores *Spec by default, so Spock specs would silently never run -->
             <plugin>
