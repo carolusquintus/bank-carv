@@ -14,6 +14,10 @@
     <name>Bank Card Service</name>
     <description>Card microservice for managing customer cards</description>
 
+    <properties>
+        <jib.skip>false</jib.skip>
+    </properties>
+
     <dependencies>
         <dependency>
             <groupId>org.springframework.boot</groupId>

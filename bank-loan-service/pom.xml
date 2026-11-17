@@ -15,6 +15,10 @@
     <name>Bank Loan Service</name>
     <description>Loan microservice for managing customer loans</description>
 
+    <properties>
+        <jib.skip>false</jib.skip>
+    </properties>
+
     <dependencies>
         <dependency>
             <groupId>org.springframework.boot</groupId>
