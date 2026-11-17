@@ -6,17 +6,71 @@ services:
     image: mcr.microsoft.com/mssql/server:2025-latest
     environment:
       ACCEPT_EULA: Y
-      MSSQL_SA_PASSWORD:
+      MSSQL_SA_PASSWORD: ${MSSQL_SA_PASSWORD}
       MSSQL_PID: Developer
     ports:
       - "1444:1433"
     volumes:
       - bank-carv-db-data:/var/opt/mssql
     restart: always
-    networks:
-      - bank-carv-network
     cap_add:
       - NET_ADMIN
+    healthcheck:
+      test: [ "CMD-SHELL", "/opt/mssql-tools18/bin/sqlcmd -S localhost -U sa -P \"$${MSSQL_SA_PASSWORD}\" -C -Q 'SELECT 1' || exit 1" ]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 20s
+    networks:
+      - bank-carv-network
+
+  bank-account-service:
+    image: bank-account-service:0.0.1-SNAPSHOT
+    container_name: bank-account-service
+    ports:
+      - "8081:8080"
+    environment:
+      BAS_PORT: 8080
+      MSSQL_HOST: bank-carv-db
+      MSSQL_PORT: 1433
+      MSSQL_SA_PASSWORD: ${MSSQL_SA_PASSWORD}
+    depends_on:
+      bank-carv-db:
+        condition: service_healthy
+    networks:
+      - bank-carv-network
+
+  bank-card-service:
+    image: bank-card-service:0.0.1-SNAPSHOT
+    container_name: bank-card-service
+    ports:
+      - "8082:8080"
+    environment:
+      BCS_PORT: 8080
+      MSSQL_HOST: bank-carv-db
+      MSSQL_PORT: 1433
+      MSSQL_SA_PASSWORD: ${MSSQL_SA_PASSWORD}
+    depends_on:
+      bank-carv-db:
+        condition: service_healthy
+    networks:
+      - bank-carv-network
+
+  bank-loan-service:
+    image: bank-loan-service:0.0.1-SNAPSHOT
+    container_name: bank-loan-service
+    ports:
+      - "8083:8080"
+    environment:
+      BLS_PORT: 8080
+      MSSQL_HOST: bank-carv-db
+      MSSQL_PORT: 1433
+      MSSQL_SA_PASSWORD: ${MSSQL_SA_PASSWORD}
+    depends_on:
+      bank-carv-db:
+        condition: service_healthy
+    networks:
+      - bank-carv-network
 
 volumes:
   bank-carv-db-data:

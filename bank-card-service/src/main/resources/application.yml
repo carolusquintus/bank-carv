@@ -1,5 +1,5 @@
 server:
-  port: 8082
+  port: ${BCS_PORT:8082}
   servlet:
     context-path: /card-service
 
@@ -7,10 +7,10 @@ spring:
   application:
     name: bank-card-service
   datasource:
-    url: jdbc:sqlserver://localhost:1444;database=bank-card-service;encrypt=true;trustServerCertificate=true;
+    url: jdbc:sqlserver://${MSSQL_HOST:localhost}:${MSSQL_PORT:1444};database=bank-card-service;encrypt=true;trustServerCertificate=true;
     driver-class-name: com.microsoft.sqlserver.jdbc.SQLServerDriver
     username: sa
-    password:
+    password: ${MSSQL_SA_PASSWORD}
   jpa:
     hibernate:
       ddl-auto: none
