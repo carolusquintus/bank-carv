@@ -112,7 +112,7 @@
                 <configuration>
                     <skip>${jib.skip}</skip>
                     <from>
-                        <image>azul-zulu:21-jre-debian</image>
+                        <image>ubuntu/jdk:21-24.04_stable</image>
                     </from>
                     <to>
                         <image>${project.artifactId}:${project.version}</image>
